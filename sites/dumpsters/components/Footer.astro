@@ -1,6 +1,8 @@
 ---
 import site from '../data/site.json';
 import Icon from '../../../shared/components/Icon.astro';
+import { Image } from 'astro:assets';
+import logo from '../assets/logo.png';
 const year = new Date().getFullYear();
 const { contact } = site;
 ---
@@ -16,6 +18,7 @@ const { contact } = site;
 
     <div class="site-footer__grid">
       <div>
+        <Image src={logo} alt={site.name} width={150} densities={[1, 2]} class="site-footer__logo" />
         <p class="site-footer__name">{site.name}</p>
         <p>A {site.legalName} business, serving {contact.areaServed}.</p>
       </div>
@@ -60,6 +63,7 @@ const { contact } = site;
   .site-footer__grid { display: grid; gap: 2rem; }
   @media (min-width: 768px) { .site-footer__grid { grid-template-columns: 1.3fr 1fr 1fr; } }
   .site-footer p, .site-footer li { margin: 0; color: #aebcb1; font-size: 0.98rem; }
+  .site-footer__logo { display: block; height: auto; margin-bottom: 1rem; border-radius: 10px; }
   .site-footer__name { margin-bottom: 0.5rem !important; font: 800 1.2rem/1.3 var(--font-display); color: #fff !important; }
   .site-footer__heading { margin-bottom: 0.75rem !important; font: 700 0.8rem/1.3 var(--font-display); letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-accent-bright) !important; }
   .site-footer ul { display: grid; gap: 0.45rem; margin: 0; padding: 0; list-style: none; }

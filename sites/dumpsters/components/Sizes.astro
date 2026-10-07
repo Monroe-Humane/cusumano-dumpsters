@@ -2,6 +2,14 @@
 import site from '../data/site.json';
 import Icon from '../../../shared/components/Icon.astro';
 import SectionHead from '../../../shared/components/SectionHead.astro';
+import { Picture } from 'astro:assets';
+import black from '../assets/trailer-black.jpg';
+import pair from '../assets/trailers-pair.jpg';
+
+const fleet = [
+  { src: black, alt: 'Black Cusumano dump trailer, side view', caption: 'Dump trailers on rubber tires: easy on driveways' },
+  { src: pair, alt: 'Black and red Cusumano dump trailers parked side by side', caption: 'Our trailers, ready for delivery' },
+];
 const popular = '15';
 ---
 <section class="ui-section" id="sizes" aria-labelledby="sizes-title">
@@ -43,6 +51,15 @@ const popular = '15';
       <li><Icon name="calendar" size={18} /> Extra days $50/day, scheduled when you order</li>
       <li><Icon name="trailer" size={18} /> Payment due at delivery</li>
     </ul>
+
+    <div class="sizes__fleet">
+      {fleet.map((f) => (
+        <figure>
+          <Picture src={f.src} alt={f.alt} formats={['avif', 'webp']} widths={[480, 800, 1200]} sizes="(min-width: 760px) 560px, 92vw" loading="lazy" />
+          <figcaption>{f.caption}</figcaption>
+        </figure>
+      ))}
+    </div>
   </div>
 </section>
 
@@ -75,4 +92,17 @@ const popular = '15';
   .sizes__notes { display: flex; flex-wrap: wrap; gap: 0.75rem 1.75rem; margin: 1.75rem 0 0; padding: 0; list-style: none; font-weight: 600; }
   .sizes__notes li { display: flex; align-items: center; gap: 0.5rem; }
   .sizes__notes :global(svg) { color: var(--color-accent); flex: none; }
+
+  .sizes__fleet { display: grid; gap: 1.25rem; margin-top: clamp(2rem, 4vw, 2.75rem); }
+  @media (min-width: 760px) { .sizes__fleet { grid-template-columns: 1fr 1fr; } }
+  .sizes__fleet figure { margin: 0; position: relative; overflow: hidden; border-radius: var(--radius-card); }
+  .sizes__fleet :global(img) { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+  .sizes__fleet figcaption {
+    position: absolute;
+    inset: auto 0 0;
+    padding: 2.5rem 1.1rem 0.9rem;
+    background: linear-gradient(transparent, rgb(10 16 12 / 0.85));
+    color: #fff;
+    font: 700 1rem/1.3 var(--font-display);
+  }
 </style>

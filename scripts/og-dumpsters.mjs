@@ -27,17 +27,21 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" v
   <text x="352" y="472" fill="#fff" font-family="Arial, sans-serif" font-weight="700" font-size="34">Call or text</text>
   <text x="352" y="522" fill="#fff" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="44">${site.contact.phone}</text>
 
-  <g transform="translate(760 330) scale(0.78)">
-    <rect x="95" y="232" width="400" height="24" rx="4" fill="#2b332d"/>
-    <path d="M60 250h40" stroke="#c9d3c4" stroke-width="10" stroke-linecap="round"/>
-    <path d="M100 90h390l-12 145H112z" fill="#3f8a2f"/>
-    <path d="M100 90h390v18H100z" fill="#2f6e23"/>
-    <g stroke="#2f6e23" stroke-width="6"><path d="M160 108v125"/><path d="M220 108v125"/><path d="M280 108v125"/><path d="M340 108v125"/><path d="M400 108v125"/><path d="M455 108v125"/></g>
-    <circle cx="330" cy="266" r="30" fill="#1a1d1b"/><circle cx="330" cy="266" r="13" fill="#9aa39b"/>
-    <circle cx="400" cy="266" r="30" fill="#1a1d1b"/><circle cx="400" cy="266" r="13" fill="#9aa39b"/>
-  </g>
 </svg>`;
 
+// The trailer photo (white background) sits on a white card at the right.
+const toPath = (u) => decodeURIComponent(u.pathname).replace(/^\/([A-Za-z]:)/, '$1');
+const trailer = await sharp(toPath(new URL('../sites/dumpsters/assets/trailer-red-studio.jpg', import.meta.url)))
+  .resize({ width: 310, height: 205, fit: 'contain', background: '#ffffff' })
+  .toBuffer();
+const card = Buffer.from('<svg xmlns="http://www.w3.org/2000/svg" width="350" height="235"><rect width="350" height="235" rx="24" fill="#fff"/></svg>');
+
 const out = new URL('../sites/dumpsters/public/og.png', import.meta.url);
-await sharp(Buffer.from(svg)).png({ compressionLevel: 9 }).toFile(out.pathname.replace(/^\/([A-Za-z]:)/, '$1'));
+await sharp(Buffer.from(svg))
+  .composite([
+    { input: card, left: 790, top: 382 },
+    { input: trailer, left: 810, top: 397 },
+  ])
+  .png({ compressionLevel: 9 })
+  .toFile(toPath(out));
 console.log('Wrote sites/dumpsters/public/og.png');

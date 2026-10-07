@@ -2,8 +2,7 @@
 import site from '../data/site.json';
 import { Picture } from 'astro:assets';
 import Icon from '../../../shared/components/Icon.astro';
-// Swap in a bigger file with the same name for a sharper hero (this one is 640px, from Facebook).
-import trailer from '../assets/trailer-red.jpg';
+import delivered from '../assets/delivered-red.jpg';
 const { hero, contact } = site;
 ---
 <section class="hero" id="top" aria-labelledby="hero-title">
@@ -23,10 +22,10 @@ const { hero, contact } = site;
 
     <figure class="hero__art">
       <Picture
-        src={trailer}
-        alt="A Cusumano Dumpster Rentals dump trailer, loaded with bags and debris"
+        src={delivered}
+        alt="A red Cusumano dump trailer delivered to a customer's driveway"
         formats={['avif', 'webp']}
-        widths={[320, 640]}
+        widths={[480, 800, 1200, 1600]}
         sizes="(min-width: 960px) 560px, 92vw"
         loading="eager"
         fetchpriority="high"
@@ -69,16 +68,24 @@ const { hero, contact } = site;
   .hero__points li { display: flex; gap: 0.5rem; align-items: center; }
   .hero__points :global(svg) { flex: none; color: var(--color-accent); }
 
-  .hero__art {
-    position: relative;
-    margin: 0;
-    padding: clamp(1rem, 3vw, 1.75rem);
+  .hero__art { position: relative; margin: 0; }
+  .hero__art::before {
+    content: '';
+    position: absolute;
+    inset: 1.25rem -1.25rem -1.25rem 1.25rem;
+    border: 3px solid var(--color-accent-bright);
     border-radius: 18px;
-    background: #fff;
-    border: 1px solid var(--color-line);
-    box-shadow: 0 30px 60px -20px rgb(18 28 21 / 0.35);
+    z-index: -1;
   }
-  .hero__art :global(img) { display: block; width: 100%; height: auto; }
+  .hero__art :global(img) {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 18px;
+    box-shadow: 0 30px 60px -20px rgb(18 28 21 / 0.45);
+  }
+  @media (max-width: 640px) { .hero__art::before { inset: 0.75rem -0.6rem -0.75rem 0.6rem; } }
   .hero__price {
     position: absolute;
     right: -0.75rem;
