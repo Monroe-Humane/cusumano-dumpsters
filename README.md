@@ -24,10 +24,10 @@ shared/                         used by both sites
 sites/construction/
   data/site.json                ALL text: services, gallery, FAQ, contact, address
   assets/work/                  project photos (optimized automatically at build)
-  styles/site.css               imports shared/base.css (default navy/orange)
+  styles/site.css               imports shared/base.css (default gold accent)
 sites/dumpsters/
   data/site.json                ALL text: sizes, prices, fees, materials, FAQ, full rental terms
-  styles/site.css               imports shared/base.css and swaps in the green colours
+  styles/site.css               imports shared/base.css and sets the lime accent
   pages/terms.astro             the Terms & Conditions page (/terms/)
 ```
 
