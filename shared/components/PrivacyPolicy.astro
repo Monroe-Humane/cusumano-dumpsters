@@ -1,0 +1,72 @@
+---
+// Plain-language privacy policy shared by both sites. Each site's pages/privacy.astro
+// passes its own business details.
+interface Props {
+  businessName: string;
+  legalName: string;
+  email: string;
+  phone: string;
+  phoneTel: string;
+  address: string;
+  /** What the site's form asks for, e.g. "your name, phone number and project details". */
+  formCollects: string;
+  /** Third-party embeds on the site, e.g. a Google Map. */
+  embeds?: string[];
+  updated: string;
+}
+const { businessName, legalName, email, phone, phoneTel, address, formCollects, embeds = [], updated } = Astro.props;
+---
+<article class="ui-container privacy">
+  <p class="ui-eyebrow">Privacy</p>
+  <h1 class="ui-h2">Privacy Policy</h1>
+  <p class="privacy__updated">Last updated {updated}</p>
+
+  <p>
+    This policy explains what information {businessName} ({legalName}) collects through this website and how we use it.
+    The short version: we only use your details to answer you and do the work you ask for, and we never sell them.
+  </p>
+
+  <h2 class="ui-h3">What we collect</h2>
+  <ul>
+    <li><strong>What you send us.</strong> When you use the form, we receive {formCollects}.</li>
+    <li><strong>Visit statistics.</strong> We count page views with Cloudflare Web Analytics, which doesn't use cookies or track you across other websites. It tells us things like how many people visited and which pages they viewed.</li>
+    <li><strong>Server logs.</strong> Our web host (Cloudflare) briefly keeps standard technical logs, such as IP address and browser type, to keep the site running and secure.</li>
+  </ul>
+
+  <h2 class="ui-h3">How we use it</h2>
+  <ul>
+    <li>To reply to you, give you a quote and schedule the work.</li>
+    <li>To keep records of the jobs we do for you.</li>
+  </ul>
+  <p>We don't sell, rent or trade your information, and we don't use it for advertising.</p>
+
+  <h2 class="ui-h3">Who else handles it</h2>
+  <ul>
+    <li><strong>Form delivery.</strong> Form messages are delivered to our email inbox by FormSubmit, an email forwarding service.</li>
+    <li><strong>Hosting.</strong> The website is hosted by Cloudflare.</li>
+    {embeds.map((e) => <li>{e}</li>)}
+  </ul>
+
+  <h2 class="ui-h3">How long we keep it</h2>
+  <p>We keep messages and job records only as long as we need them for your project, our records, and any legal or tax requirements.</p>
+
+  <h2 class="ui-h3">Your choices</h2>
+  <p>You can ask us what information we have about you, or ask us to correct or delete it, by contacting us below. This website isn't directed at children under 13.</p>
+
+  <h2 class="ui-h3">Contact us</h2>
+  <address class="privacy__contact">
+    {legalName}<br />
+    {address}<br />
+    <a href={phoneTel}>{phone}</a> · <a href={`mailto:${email}`}>{email}</a>
+  </address>
+</article>
+
+<style>
+  .privacy { max-width: 760px; display: grid; gap: 0.9rem; }
+  .privacy h2 { margin-top: 1rem; }
+  .privacy p { margin: 0; }
+  .privacy ul { margin: 0; padding-left: 1.25rem; display: grid; gap: 0.45rem; list-style: disc; }
+  .privacy__updated { color: var(--color-muted); }
+  .privacy__contact { font-style: normal; }
+  .privacy a { color: var(--color-primary); font-weight: 600; }
+</style>

@@ -1,0 +1,124 @@
+---
+import site from '../data/site.json';
+import { Picture } from 'astro:assets';
+import Icon from '../../../shared/components/Icon.astro';
+import { workPhoto } from '../lib/images';
+import SectionHead from '../../../shared/components/SectionHead.astro';
+---
+<section class="ui-section ui-section--dark ui-blueprint" id="work" aria-labelledby="work-title">
+  <div class="ui-container">
+    <div class="work__head">
+      <SectionHead
+        id="work-title"
+        eyebrow="Our work"
+        title="Recent projects around Monroe"
+        lede="A few of the garages, decks, porches and outbuildings we've built for neighbors."
+      />
+      <div class="work__nav" data-slider-nav hidden>
+        <button type="button" class="work__arrow" data-slider-prev aria-label="Previous projects"><Icon name="chevronLeft" /></button>
+        <button type="button" class="work__arrow" data-slider-next aria-label="Next projects"><Icon name="chevronRight" /></button>
+      </div>
+    </div>
+  </div>
+
+  <ul class="work__track" data-slider tabindex="0" aria-label="Project photos (scroll sideways for more)">
+    {site.gallery.map((item, i) => (
+      <li class="work__slide">
+        <figure>
+          <Picture
+            src={workPhoto(item.image)}
+            alt={`${item.title} built by Cusumano Home Improvements`}
+            formats={['avif', 'webp']}
+            widths={[440, 660, 880]}
+            sizes="(min-width: 600px) 440px, 82vw"
+            loading={i < 2 ? 'eager' : 'lazy'}
+          />
+          <figcaption>
+            <span class="work__tag">{item.tag}</span>
+            <span class="work__title">{item.title}</span>
+          </figcaption>
+        </figure>
+      </li>
+    ))}
+  </ul>
+
+  <div class="ui-container">
+    <div class="ui-actions mt-8">
+      <a class="ui-btn ui-btn--light" href={site.contact.facebook} target="_blank" rel="noopener noreferrer">
+        <Icon name="facebook" /> More projects on Facebook
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .work__head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1rem; }
+  .work__head :global(.ui-section-head) { margin-bottom: 0; }
+  .work__nav:not([hidden]) { display: flex; gap: 0.5rem; }
+  .work__arrow {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    border: 1.5px solid rgb(255 255 255 / 0.35);
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+  }
+  .work__arrow:hover:not(:disabled) { background: rgb(255 255 255 / 0.1); border-color: #fff; }
+  .work__arrow:disabled { opacity: 0.35; cursor: default; }
+
+  .work__track {
+    --edge: max(clamp(1rem, 4vw, 2rem), calc((100vw - 1180px) / 2 + clamp(1rem, 4vw, 2rem)));
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: min(82vw, 440px);
+    gap: 1.25rem;
+    margin: clamp(2rem, 4vw, 2.75rem) 0 0;
+    padding: 0 var(--edge) 0.5rem;
+    list-style: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--edge);
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+  .work__track::-webkit-scrollbar { display: none; }
+  .work__track:focus-visible { outline-offset: -3px; }
+  .work__slide { scroll-snap-align: start; }
+  .work__slide figure { position: relative; margin: 0; overflow: hidden; border-radius: 16px; }
+  .work__slide :global(img) { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform 0.4s ease; }
+  .work__slide figure:hover :global(img) { transform: scale(1.03); }
+  .work__slide figcaption {
+    position: absolute;
+    inset: auto 0 0;
+    display: grid;
+    gap: 0.15rem;
+    padding: 2.5rem 1.1rem 1rem;
+    background: linear-gradient(transparent, rgb(10 16 24 / 0.85));
+  }
+  .work__tag { font: 700 0.72rem/1.3 var(--font-display); letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-accent-bright); }
+  .work__title { font: 800 1.25rem/1.2 var(--font-display); color: #fff; }
+</style>
+
+<script>
+  const track = document.querySelector<HTMLElement>('[data-slider]');
+  const nav = document.querySelector<HTMLElement>('[data-slider-nav]');
+  const prev = document.querySelector<HTMLButtonElement>('[data-slider-prev]');
+  const next = document.querySelector<HTMLButtonElement>('[data-slider-next]');
+
+  if (track && nav && prev && next) {
+    nav.hidden = false;
+    const step = () => (track.querySelector('li')?.getBoundingClientRect().width ?? 300) + 20;
+    const update = () => {
+      prev.disabled = track.scrollLeft <= 4;
+      next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+    };
+    prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+    next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+    track.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+  }
+</script>

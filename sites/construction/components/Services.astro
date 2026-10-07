@@ -1,0 +1,64 @@
+---
+import site from '../data/site.json';
+import Icon from '../../../shared/components/Icon.astro';
+import SectionHead from '../../../shared/components/SectionHead.astro';
+type IconName = Parameters<typeof Icon>[0]['name'];
+---
+<section class="ui-section" id="services" aria-labelledby="services-title">
+  <div class="ui-container">
+    <SectionHead
+      id="services-title"
+      eyebrow="What we do"
+      title="Services for every part of your home"
+      lede="One local, family crew for the whole job, from the first estimate to the last cleanup."
+    />
+
+    <div class="services__grid">
+      {site.serviceGroups.map((g) => (
+        <article class="ui-card">
+          <span class="ui-icon-badge"><Icon name={g.icon as IconName} size={26} /></span>
+          <h3 class="ui-h3">{g.title}</h3>
+          <p>{g.text}</p>
+          <ul class="ui-tags" aria-label={`${g.title} services`}>
+            {g.services.map((s) => <li>{s}</li>)}
+          </ul>
+        </article>
+      ))}
+    </div>
+
+    <aside class="services__dumpster" aria-labelledby="dumpster-title">
+      <span class="ui-icon-badge"><Icon name="truck" size={26} /></span>
+      <div class="services__dumpster-text">
+        <h3 class="ui-h3" id="dumpster-title">{site.dumpsters.title}</h3>
+        <p>{site.dumpsters.text}</p>
+      </div>
+      <a class="ui-btn ui-btn--light" href={site.links.dumpsterSite}>{site.dumpsters.linkLabel} <Icon name="arrow" /></a>
+    </aside>
+  </div>
+</section>
+
+<style>
+  .services__grid { display: grid; gap: 1.25rem; }
+  @media (min-width: 680px) { .services__grid { grid-template-columns: repeat(2, 1fr); } }
+  .services__grid .ui-card { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+  .services__grid .ui-card:hover { transform: translateY(-3px); box-shadow: 0 2px 4px rgb(28 36 48 / 0.06), 0 18px 36px rgb(28 36 48 / 0.12); }
+
+  .services__dumpster {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.5rem;
+    margin-top: 1.25rem;
+    padding: clamp(1.4rem, 3vw, 1.9rem);
+    border-radius: var(--radius-card);
+    background-color: var(--color-primary);
+    background-image:
+      linear-gradient(rgb(255 255 255 / 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+    background-size: 28px 28px;
+    color: #fff;
+  }
+  .services__dumpster-text { flex: 1 1 280px; display: grid; gap: 0.35rem; }
+  .services__dumpster p { margin: 0; color: #c9d4e2; }
+  .services__dumpster .ui-icon-badge { background: var(--color-accent-bright); color: #fff; }
+</style>

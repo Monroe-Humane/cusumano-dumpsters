@@ -1,0 +1,16 @@
+---
+// Eyebrow + heading + optional lede: the opening of every section.
+interface Props {
+  eyebrow: string;
+  title: string;
+  id: string;
+  lede?: string;
+  center?: boolean;
+}
+const { eyebrow, title, id, lede, center = false } = Astro.props;
+---
+<div class:list={['ui-section-head', center && 'ui-section-head--center']}>
+  <p class="ui-eyebrow">{eyebrow}</p>
+  <h2 class="ui-h2" id={id}>{title}</h2>
+  {lede && <p class="ui-lede">{lede}</p>}
+</div>

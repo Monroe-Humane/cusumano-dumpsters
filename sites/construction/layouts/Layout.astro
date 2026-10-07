@@ -1,0 +1,58 @@
+---
+import '../styles/site.css';
+import { getImage } from 'astro:assets';
+import BaseLayout from '../../../shared/layouts/BaseLayout.astro';
+import site from '../data/site.json';
+import { workPhoto } from '../lib/images';
+
+interface Props {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+}
+const { title = site.seo.title, description = site.seo.description, noindex = false } = Astro.props;
+
+// Social share preview: the hero photo at the 1200px width link previews expect.
+const og = await getImage({ src: workPhoto(site.hero.image), width: 1200, format: 'jpg' });
+const ogImage = new URL(og.src, Astro.site);
+
+// Search engines read the business details from here (Google business card, FAQ rich results).
+const business = {
+  '@context': 'https://schema.org',
+  '@type': 'GeneralContractor',
+  name: site.name,
+  url: site.url,
+  telephone: site.contact.phone,
+  email: site.contact.email,
+  foundingDate: String(site.foundedYear),
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: site.contact.street,
+    addressLocality: site.contact.city,
+    addressRegion: site.contact.state,
+    postalCode: site.contact.zip,
+    addressCountry: 'US',
+  },
+  areaServed: site.contact.areaServed.map((name) => ({ '@type': 'City', name: `${name}, MI` })),
+  sameAs: [site.contact.facebook],
+  makesOffer: site.serviceGroups
+    .flatMap((g) => g.services)
+    .map((name) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name } })),
+};
+const faq = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: site.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+};
+---
+<BaseLayout
+  title={title}
+  description={description}
+  siteName={site.name}
+  ogImage={ogImage}
+  themeColor="#111a25"
+  jsonLd={[business, faq]}
+  noindex={noindex}
+>
+  <slot />
+</BaseLayout>

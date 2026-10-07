@@ -1,0 +1,231 @@
+---
+import site from '../data/site.json';
+import Icon from '../../../shared/components/Icon.astro';
+import SectionHead from '../../../shared/components/SectionHead.astro';
+const { contact } = site;
+// FormSubmit emails each request to formAction, then returns the visitor to /thanks/.
+const thanksUrl = new URL('/thanks/', Astro.site).href;
+const prices = Object.fromEntries(site.sizes.map((s) => [s.id, s.prices]));
+const defaultSize = '15';
+const defaultDays = '3';
+---
+<section class="ui-section ui-section--tint" id="reserve" aria-labelledby="reserve-title">
+  <div class="ui-container reserve__grid">
+    <div class="reserve__intro">
+      <SectionHead
+        id="reserve-title"
+        eyebrow="Reserve"
+        title="Request a dumpster"
+        lede="Send your request and we'll call to confirm the delivery time. Nothing is charged until delivery."
+      />
+      <ul class="reserve__contact">
+        <li>
+          <span class="ui-icon-badge"><Icon name="phone" /></span>
+          <div><span class="reserve__k">Rather call?</span><a href={contact.phoneTel}>{contact.phone}</a></div>
+        </li>
+        <li>
+          <span class="ui-icon-badge"><Icon name="message" /></span>
+          <div><span class="reserve__k">Or text</span><a href={contact.smsHref}>{contact.phone}</a></div>
+        </li>
+        <li>
+          <span class="ui-icon-badge"><Icon name="pin" /></span>
+          <div><span class="reserve__k">Based at</span><span>{contact.street}, {contact.city}, {contact.state} {contact.zip}</span></div>
+        </li>
+      </ul>
+    </div>
+
+    <form class="ui-card reserve__form" action={contact.formAction} method="POST" data-reserve-form data-prices={JSON.stringify(prices)}>
+      <input type="hidden" name="_subject" value="New dumpster rental request" />
+      <input type="hidden" name="_next" value={thanksUrl} />
+      <input type="hidden" name="_template" value="table" />
+      <input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+      <fieldset class="reserve__set">
+        <legend>Dumpster size</legend>
+        <div class="reserve__choices reserve__choices--3">
+          {site.sizes.map((s) => (
+            <label class="reserve__choice">
+              <input type="radio" name="Size" value={`${s.yards} yard (${s.dimensions})`} data-size={s.id} checked={s.id === defaultSize} required />
+              <span><strong>{s.yards} yd</strong><small>{s.dimensions}</small></span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
+      <fieldset class="reserve__set">
+        <legend>Rental length</legend>
+        <div class="reserve__choices reserve__choices--3">
+          {site.rentalDays.map((d) => (
+            <label class="reserve__choice">
+              <input type="radio" name="Rental length" value={`${d} days`} data-days={d} checked={String(d) === defaultDays} required />
+              <span><strong>{d} days</strong></span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
+      <p class="reserve__total" aria-live="polite" data-total>
+        <span data-total-amount>${prices[defaultSize][defaultDays]}</span>
+        <small data-total-label>15-yard for 3 days · due at delivery</small>
+      </p>
+      <input type="hidden" name="Quoted price" value={`$${prices[defaultSize][defaultDays]}`} data-total-field />
+
+      <div class="ui-field">
+        <label for="r-date">Delivery date</label>
+        <input class="ui-input" id="r-date" name="Delivery date" type="date" required data-date />
+      </div>
+
+      <div class="ui-field">
+        <label for="r-address">Delivery address</label>
+        <input class="ui-input" id="r-address" name="Delivery address" type="text" autocomplete="street-address" required minlength="5" placeholder="Street, city" />
+      </div>
+
+      <div class="reserve__row">
+        <div class="ui-field">
+          <label for="r-name">Name</label>
+          <input class="ui-input" id="r-name" name="Name" type="text" autocomplete="name" required minlength="2" />
+        </div>
+        <div class="ui-field">
+          <label for="r-phone">Phone</label>
+          <input class="ui-input" id="r-phone" name="Phone" type="tel" autocomplete="tel" inputmode="tel" required />
+        </div>
+      </div>
+      <div class="ui-field">
+        <label for="r-email">Email <span class="ui-optional">(optional)</span></label>
+        <input class="ui-input" id="r-email" name="Email" type="email" autocomplete="email" />
+      </div>
+
+      <div class="ui-field">
+        <label for="r-materials">What are you throwing out?</label>
+        <textarea class="ui-input" id="r-materials" name="Materials" required minlength="3" placeholder="e.g. kitchen tear-out, old furniture, roofing"></textarea>
+      </div>
+      <label class="reserve__check">
+        <input type="checkbox" name="Heavy materials" value="Yes: concrete, dirt, brick or shingles" />
+        <span>It includes concrete, dirt, brick or shingles <small>(may need special pricing)</small></span>
+      </label>
+
+      <div class="ui-field">
+        <label for="r-notes">Where should we put it? <span class="ui-optional">(optional)</span></label>
+        <textarea class="ui-input reserve__notes" id="r-notes" name="Placement notes" placeholder="e.g. left side of the driveway, watch for low wires"></textarea>
+      </div>
+
+      <label class="reserve__check reserve__check--terms">
+        <input type="checkbox" name="Agreed to terms" value="Yes" required />
+        <span>I agree to the <a href="/terms/" target="_blank">Dumpster Rental Terms &amp; Conditions</a>, including the 2-ton limit and prohibited materials.</span>
+      </label>
+
+      <button class="ui-btn ui-btn--accent w-full" type="submit" data-submit>Send request <Icon name="arrow" /></button>
+      <p class="reserve__fine">This is a request, not a booking. We'll call to confirm before anything is scheduled. <a href="/privacy/">Privacy policy</a></p>
+    </form>
+  </div>
+</section>
+
+<style>
+  .reserve__grid { display: grid; gap: clamp(2rem, 5vw, 3.5rem); align-items: start; }
+  @media (min-width: 960px) { .reserve__grid { grid-template-columns: 0.85fr 1.15fr; } }
+  @media (min-width: 960px) { .reserve__intro { position: sticky; top: calc(var(--header-h, 68px) + 1.5rem); } }
+  .reserve__contact { display: grid; gap: 1rem; margin: 0; padding: 0; list-style: none; }
+  .reserve__contact li { display: flex; gap: 0.9rem; align-items: center; }
+  .reserve__contact div { display: grid; }
+  .reserve__k { font: 700 0.75rem/1.3 var(--font-display); letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-muted); }
+  .reserve__contact a, .reserve__contact div > span:last-child { font: 700 1.1rem/1.35 var(--font-display); color: var(--color-ink); text-decoration: none; }
+  .reserve__contact a:hover { color: var(--color-accent); }
+
+  .reserve__form { gap: 1.15rem; border-top: 5px solid var(--color-accent-bright); }
+  .reserve__set { margin: 0; padding: 0; border: 0; min-width: 0; }
+  .reserve__set legend { margin-bottom: 0.45rem; padding: 0; font: 700 0.9rem/1.3 var(--font-display); }
+  .reserve__choices { display: grid; gap: 0.6rem; }
+  .reserve__choices--3 { grid-template-columns: repeat(3, 1fr); }
+  .reserve__choice { position: relative; cursor: pointer; }
+  .reserve__choice input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .reserve__choice span {
+    display: grid;
+    justify-items: center;
+    gap: 0.1rem;
+    padding: 0.75rem 0.4rem;
+    border: 1.5px solid #c6cdbd;
+    border-radius: 10px;
+    background: #fff;
+    text-align: center;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+  }
+  .reserve__choice strong { font: 800 1.1rem/1.2 var(--font-display); }
+  .reserve__choice small { font-size: 0.78rem; color: var(--color-muted); }
+  .reserve__choice input:checked + span { border-color: var(--color-accent); background: var(--color-primary-soft); box-shadow: inset 0 0 0 1px var(--color-accent); }
+  .reserve__choice input:focus-visible + span { outline: 3px solid var(--color-accent-bright); outline-offset: 2px; }
+
+  .reserve__total {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25rem 0.75rem;
+    margin: 0;
+    padding: 0.9rem 1.1rem;
+    border-radius: 12px;
+    background: var(--color-primary);
+    color: #fff;
+  }
+  .reserve__total span { font: 800 2rem/1 var(--font-display); letter-spacing: -0.02em; }
+  .reserve__total small { color: #cfe0cb; font-size: 0.95rem; }
+
+  .reserve__row { display: grid; gap: 1.15rem; }
+  @media (min-width: 560px) { .reserve__row { grid-template-columns: 1fr 1fr; } }
+  .reserve__notes { min-height: 90px !important; }
+  .reserve__check { display: flex; gap: 0.65rem; align-items: flex-start; cursor: pointer; }
+  .reserve__check input { flex: none; width: 1.2rem; height: 1.2rem; margin-top: 0.2rem; accent-color: var(--color-accent); }
+  .reserve__check small { color: var(--color-muted); }
+  .reserve__check--terms { padding: 0.85rem 1rem; border-radius: 10px; background: var(--color-paper); border: 1px solid var(--color-line); }
+  .reserve__check a { color: var(--color-primary); font-weight: 700; }
+  .reserve__fine { margin: 0; font-size: 0.88rem; text-align: center; color: var(--color-muted); }
+  .reserve__fine a { color: var(--color-primary); font-weight: 600; text-decoration: underline; }
+</style>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-reserve-form]');
+  if (form) {
+    const prices: Record<string, Record<string, number>> = JSON.parse(form.dataset.prices || '{}');
+    const amount = form.querySelector<HTMLElement>('[data-total-amount]');
+    const label = form.querySelector<HTMLElement>('[data-total-label]');
+    const field = form.querySelector<HTMLInputElement>('[data-total-field]');
+    const date = form.querySelector<HTMLInputElement>('[data-date]');
+
+    const update = () => {
+      const size = form.querySelector<HTMLInputElement>('input[data-size]:checked')?.dataset.size;
+      const days = form.querySelector<HTMLInputElement>('input[data-days]:checked')?.dataset.days;
+      const price = size && days ? prices[size]?.[days] : undefined;
+      if (!price || !amount || !label || !field) return;
+      amount.textContent = `$${price}`;
+      label.textContent = `${size}-yard for ${days} days · due at delivery`;
+      field.value = `$${price}`;
+    };
+    form.addEventListener('change', update);
+    // reset fires before the fields change back (e.g. browser back-forward cache).
+    form.addEventListener('reset', () => setTimeout(update));
+    update();
+
+    // Same-day drop-off is offered, so today is the earliest date (local time, not UTC).
+    if (date) {
+      const now = new Date();
+      date.min = new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+    }
+
+    // "Reserve a 10-yard" buttons in the sizes section preselect that size.
+    document.querySelectorAll<HTMLAnchorElement>('[data-pick-size]').forEach((a) => {
+      a.addEventListener('click', () => {
+        const radio = form.querySelector<HTMLInputElement>(`input[data-size="${a.dataset.pickSize}"]`);
+        if (radio) {
+          radio.checked = true;
+          update();
+        }
+      });
+    });
+
+    form.addEventListener('submit', () => {
+      const btn = form.querySelector<HTMLButtonElement>('[data-submit]');
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'Sending…';
+      }
+    });
+  }
+</script>

@@ -1,0 +1,257 @@
+{
+  "name": "Cusumano Home Improvements",
+  "shortName": "Cusumano",
+  "foundedYear": 1974,
+  "url": "https://cusumanohi.com",
+  "seo": {
+    "title": "Cusumano Home Improvements | Home Improvement Contractor in Monroe, MI",
+    "description": "Family-owned contractor in Monroe, Michigan since 1974. Garages, sheds, pole barns, additions, porches, patio covers, pergolas, concrete driveways, patios, foundations and siding. Free estimates."
+  },
+  "contact": {
+    "phone": "734-777-8158",
+    "phoneTel": "tel:+17347778158",
+    "email": "copernan@yahoo.com",
+    "street": "2257 Heiss Rd",
+    "city": "Monroe",
+    "state": "MI",
+    "zip": "48162",
+    "areaServed": [
+      "Monroe",
+      "Temperance",
+      "Carleton",
+      "Flat Rock"
+    ],
+    "facebook": "https://www.facebook.com/cusumanocement/",
+    "mapEmbed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d757181.5877706326!2d-83.53463140000001!3d42.155837950000006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x823c302b528c2879%3A0x2a66587183c2b38a!2sCusumano%20Home%20Improvements%20%26%20Dumpster%20rentals!5e0!3m2!1sen!2sus!4v1751242413143!5m2!1sen!2sus",
+    "mapLink": "https://www.google.com/maps/search/?api=1&query=Cusumano+Home+Improvements+%26+Dumpster+rentals+Monroe+MI",
+    "formAction": "https://formsubmit.co/copernan@yahoo.com"
+  },
+  "hero": {
+    "label": "Family-owned in Monroe since 1974",
+    "title": "Built right the first time, for over 50 years.",
+    "copy": "Garages, pole barns, additions, porches, pergolas, concrete and siding for homeowners across Monroe County, from the family that's been doing it for three generations.",
+    "image": "garage-covered-porch.jpg",
+    "imageAlt": "Detached garage with an attached covered porch and brick columns, built by Cusumano Home Improvements"
+  },
+  "stats": [
+    {
+      "value": "50+",
+      "label": "Years in business"
+    },
+    {
+      "value": "3",
+      "label": "Generations, family-owned"
+    },
+    {
+      "value": "5.0★",
+      "label": "Google rating (90 reviews)"
+    },
+    {
+      "value": "Free",
+      "label": "Estimates on every job"
+    }
+  ],
+  "serviceGroups": [
+    {
+      "title": "Garages & Outbuildings",
+      "icon": "garage",
+      "text": "Durable, competitively priced garages and outbuildings, designed to fit your property and how you'll use it.",
+      "services": [
+        "Garages",
+        "Sheds",
+        "Pole Barns",
+        "Carports"
+      ]
+    },
+    {
+      "title": "Porches, Patio Covers & Pergolas",
+      "icon": "deck",
+      "text": "Covered porches and shade structures that turn the outside of your home into living space.",
+      "services": [
+        "Porches",
+        "Patio Covers",
+        "Pergolas"
+      ]
+    },
+    {
+      "title": "Concrete & Foundations",
+      "icon": "concrete",
+      "text": "Foundations, driveways, walks and patios poured to last through Michigan winters.",
+      "services": [
+        "Foundations",
+        "Driveways",
+        "Patios",
+        "Sidewalks"
+      ]
+    },
+    {
+      "title": "Additions & Siding",
+      "icon": "hammer",
+      "text": "More room for your family and a fresh, weather-tight exterior, built by one local crew.",
+      "services": [
+        "Additions",
+        "Siding"
+      ]
+    }
+  ],
+  "dumpsters": {
+    "title": "Need a dumpster?",
+    "text": "10, 15 and 20 yard dumpsters for 3, 5 or 7 days, from our sister business, Cusumano Dumpster Rentals.",
+    "linkLabel": "See sizes & prices"
+  },
+  "gallery": [
+    {
+      "image": "three-car-garage.jpg",
+      "title": "Three-car garage",
+      "tag": "Garages"
+    },
+    {
+      "image": "front-porch.jpg",
+      "title": "Front porch rebuild",
+      "tag": "Porches"
+    },
+    {
+      "image": "pool-deck.jpg",
+      "title": "Pool deck with gate",
+      "tag": "Decks"
+    },
+    {
+      "image": "outdoor-bar.jpg",
+      "title": "Outdoor bar pavilion",
+      "tag": "Outdoor Living"
+    },
+    {
+      "image": "two-car-garage.jpg",
+      "title": "Two-car garage",
+      "tag": "Garages"
+    },
+    {
+      "image": "patio-pergola.jpg",
+      "title": "Pergola over a concrete patio",
+      "tag": "Pergolas & Concrete"
+    },
+    {
+      "image": "raised-deck.jpg",
+      "title": "Raised backyard deck",
+      "tag": "Decks"
+    },
+    {
+      "image": "porch-roof.jpg",
+      "title": "Porch roof over the front stoop",
+      "tag": "Porches"
+    },
+    {
+      "image": "second-story-deck.jpg",
+      "title": "Second-story deck",
+      "tag": "Decks"
+    },
+    {
+      "image": "patio-cover.jpg",
+      "title": "Patio cover with vinyl railing",
+      "tag": "Outdoor Living"
+    },
+    {
+      "image": "single-car-garage.jpg",
+      "title": "Single-car garage",
+      "tag": "Garages"
+    },
+    {
+      "image": "pergola.jpg",
+      "title": "Freestanding pergola",
+      "tag": "Pergolas"
+    },
+    {
+      "image": "wraparound-pool-deck.jpg",
+      "title": "Wraparound pool deck",
+      "tag": "Decks"
+    }
+  ],
+  "about": {
+    "title": "Three generations of craftsmanship in Monroe",
+    "paragraphs": [
+      "For over 50 years, Cusumano Home Improvements has been the trusted choice for homeowners throughout Monroe, Michigan and the surrounding area. As a family-owned and operated business, we bring three generations of craftsmanship and experience to every project.",
+      "Whether it's a new garage, a covered porch or a fresh driveway, we treat your home like the investment it is. From the first estimate to the final cleanup, you work directly with the family that does the work."
+    ],
+    "points": [
+      "Free, no-obligation estimates",
+      "Licensed and insured in Michigan",
+      "Family-owned and operated since 1974",
+      "Quality materials from reputable suppliers",
+      "Cash, check and major credit cards accepted"
+    ]
+  },
+  "faq": [
+    {
+      "q": "What areas do you serve?",
+      "a": "We primarily serve Monroe, Michigan and surrounding areas including Temperance, Carleton, Flat Rock and nearby communities. For projects outside our usual area, contact us to talk it over."
+    },
+    {
+      "q": "Do you provide free estimates?",
+      "a": "Yes. Estimates are free and there's no obligation. Call or send a message to set up a time to talk about your project."
+    },
+    {
+      "q": "What affects the price of a project?",
+      "a": "Size, materials, design, site conditions and the features you choose. Every project is different, which is why we give a free, detailed estimate for yours."
+    },
+    {
+      "q": "How long has Cusumano been in business?",
+      "a": "Since 1974: more than 50 years serving Monroe and the surrounding area."
+    },
+    {
+      "q": "Are you licensed and insured?",
+      "a": "Yes. We carry all the licensing and insurance Michigan requires of home improvement contractors."
+    },
+    {
+      "q": "What payment do you accept?",
+      "a": "Cash, check and major credit cards. Payment terms and schedules are agreed during project planning."
+    },
+    {
+      "q": "How long does a typical project take?",
+      "a": "It depends on scope, complexity and the weather. We'll give you a realistic timeline at your consultation and keep you updated as the work goes."
+    },
+    {
+      "q": "Do you rent dumpsters?",
+      "a": "Yes, through our sister business, Cusumano Dumpster Rentals: 10, 15 and 20 yard dumpsters for 3, 5 or 7 days. See sizes, prices and booking on the dumpster rentals website."
+    }
+  ],
+  "links": {
+    "dumpsterSite": "https://cusumano-dumpsters.pages.dev"
+  },
+  "reviews": {
+    "rating": "5.0",
+    "count": 90,
+    "url": "https://maps.google.com/?cid=3055226641782584202",
+    "items": [
+      {
+        "quote": "He designed and built the perfect porch on our house and we are very pleased. So are the neighbors!",
+        "name": "Thomas Z.",
+        "project": "Porch"
+      },
+      {
+        "quote": "Sal and his crew poured our driveway a few years ago and it still looks like it did the week they poured it.",
+        "name": "Rosa S.",
+        "project": "Driveway"
+      },
+      {
+        "quote": "Built a big garage for me and the fit and finish is unmatched let alone how easy the deal went.",
+        "name": "Jimmy W.",
+        "project": "Garage"
+      },
+      {
+        "quote": "They did my addition. Looks awesome, went up fast. The owner of the company is actually on the job site and I was able to ask questions.",
+        "name": "Dawn M.",
+        "project": "Addition"
+      },
+      {
+        "quote": "Sal came out immediately, gave us a good quote, and he & his team started the job almost immediately. His team did an AMAZING job!",
+        "name": "AJ",
+        "project": "Concrete patio"
+      },
+      {
+        "quote": "They had built a garage for us years before on Washington St. We are returning customers and would use them again.",
+        "name": "Janet Z.",
+        "project": "Garage"
+      }
+    ]
+  }
+}

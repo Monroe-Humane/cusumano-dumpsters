@@ -1,0 +1,18 @@
+@import "../../../shared/styles/base.css";
+
+/* Dumpster brand: the green of the "Cusumano Dumpster Rentals" banner, on the shared
+   layout. Only colour tokens change; every .ui-* class picks these up. */
+@theme {
+  --color-paper: #f5f6f1;
+  --color-paper-200: #e7ebe1;
+  --color-ink: #1a241d;
+  --color-muted: #4d5a50;
+  --color-line: #d4dbcc;
+  --color-primary: #1f4a29;
+  --color-primary-hover: #163820;
+  --color-primary-soft: #e3eedf;
+  --color-steel: #121c15;
+  --color-accent: #2a7530;
+  --color-accent-hover: #1b5e20;
+  --color-accent-bright: #8cc63f;
+}

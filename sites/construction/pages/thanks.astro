@@ -1,0 +1,14 @@
+---
+import Layout from '../layouts/Layout.astro';
+import site from '../data/site.json';
+---
+<Layout title={`Thanks | ${site.name}`} description="Your message was sent." noindex>
+  <main id="main" class="ui-section">
+    <div class="ui-container grid max-w-2xl justify-items-center gap-5 text-center">
+      <p class="ui-eyebrow">Message sent</p>
+      <h1 class="ui-h1">Thanks, we'll be in touch.</h1>
+      <p class="ui-lede">We usually reply within a business day. If it's urgent, call us at <a class="font-bold text-primary" href={site.contact.phoneTel}>{site.contact.phone}</a>.</p>
+      <a class="ui-btn ui-btn--primary" href="/">Back to the home page</a>
+    </div>
+  </main>
+</Layout>

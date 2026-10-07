@@ -1,0 +1,47 @@
+---
+import site from '../data/site.json';
+import Icon from '../../../shared/components/Icon.astro';
+const { about } = site;
+---
+<section class="ui-section" id="about" aria-labelledby="about-title">
+  <div class="ui-container about__grid">
+    <div class="about__text">
+      <p class="ui-eyebrow">About us</p>
+      <h2 class="ui-h2" id="about-title">{about.title}</h2>
+      {about.paragraphs.map((p) => <p class="ui-lede">{p}</p>)}
+    </div>
+
+    <aside class="ui-card about__card" aria-label="Why choose us">
+      <p class="about__since"><span>Since</span> {site.foundedYear}</p>
+      <h3 class="ui-h3">Why homeowners choose us</h3>
+      <ul class="about__points">
+        {about.points.map((point) => (
+          <li><span class="about__check"><Icon name="check" size={16} /></span>{point}</li>
+        ))}
+      </ul>
+      <a class="ui-btn ui-btn--primary mt-2" href="#contact">Start your project <Icon name="arrow" /></a>
+    </aside>
+  </div>
+</section>
+
+<style>
+  .about__grid { display: grid; gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+  @media (min-width: 960px) { .about__grid { grid-template-columns: 1.2fr 1fr; } }
+  .about__text { display: grid; gap: 1.1rem; }
+  .about__card { border-top: 5px solid var(--color-accent-bright); gap: 1rem; }
+  .about__since { margin: 0; font: 800 3rem/1 var(--font-display); color: var(--color-primary); letter-spacing: -0.03em; }
+  .about__since span { display: block; font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-accent); }
+  .about__points { display: grid; gap: 0.7rem; margin: 0; padding: 0; list-style: none; }
+  .about__points li { display: flex; gap: 0.7rem; align-items: flex-start; font-weight: 600; }
+  .about__check {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 1.6rem;
+    height: 1.6rem;
+    margin-top: 0.05rem;
+    border-radius: 50%;
+    background: var(--color-primary-soft);
+    color: var(--color-primary);
+  }
+</style>

@@ -1,0 +1,31 @@
+---
+// The whole site: one page, one section per component. Text lives in data/site.json.
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Stats from '../components/Stats.astro';
+import Services from '../components/Services.astro';
+import Gallery from '../components/Gallery.astro';
+import About from '../components/About.astro';
+import Faq from '../../../shared/components/Faq.astro';
+import Reviews from '../../../shared/components/Reviews.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+import site from '../data/site.json';
+---
+<Layout>
+  <Header />
+  <main id="main">
+    <Hero />
+    <Stats />
+    <Services />
+    <Gallery />
+    <About />
+    <Reviews reviews={site.reviews} />
+    <Faq items={site.faq}>
+      Don't see your question? <a href={site.contact.phoneTel}>Call {site.contact.phone}</a> or <a href="#contact">send us a message</a>.
+    </Faq>
+    <Contact />
+  </main>
+  <Footer />
+</Layout>

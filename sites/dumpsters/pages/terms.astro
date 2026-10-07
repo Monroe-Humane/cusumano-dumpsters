@@ -1,0 +1,63 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import site from '../data/site.json';
+const { terms, contact } = site;
+---
+<Layout title={`Rental Terms & Conditions | ${site.name}`} description={`The terms and conditions for renting a dumpster from ${site.legalName} (${site.name}).`}>
+  <Header />
+  <main id="main" class="ui-section">
+    <article class="ui-container terms">
+      <p class="ui-eyebrow">Rental terms</p>
+      <h1 class="ui-h2">{terms.title}</h1>
+      <address class="terms__who">
+        <strong>{site.legalName}</strong> ({site.name})<br />
+        {contact.street}, {contact.city}, {contact.state} {contact.zip} · <a href={contact.phoneTel}>{contact.phone}</a>
+      </address>
+
+      <ol class="terms__list">
+        {terms.sections.map((sec, i) => (
+          <li>
+            <h2 class="ui-h3"><span class="terms__num">{i + 1}.</span> {sec.title}</h2>
+            {sec.paragraphs.map((p) => <p>{p}</p>)}
+            {sec.list && <ul>{sec.list.map((item) => <li>{item}</li>)}</ul>}
+            {sec.after && sec.after.map((p) => <p>{p}</p>)}
+          </li>
+        ))}
+      </ol>
+
+      <section class="terms__ack" aria-labelledby="ack-title">
+        <h2 class="ui-h3" id="ack-title">Customer Acknowledgment</h2>
+        <p>{terms.acknowledgment}</p>
+      </section>
+
+      <div class="ui-actions terms__actions">
+        <a class="ui-btn ui-btn--accent" href="/#reserve">Reserve a dumpster</a>
+        <button type="button" class="ui-btn ui-btn--outline" data-print>Print these terms</button>
+      </div>
+    </article>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .terms { max-width: 820px; display: grid; gap: 1rem; }
+  .terms__who { font-style: normal; color: var(--color-muted); }
+  .terms__who a { color: var(--color-primary); font-weight: 600; }
+  .terms__list { display: grid; gap: 1.5rem; margin: 1rem 0 0; padding: 0; list-style: none; }
+  .terms__num { color: var(--color-accent); }
+  .terms__list p { margin: 0.4rem 0 0; }
+  .terms__list ul { margin: 0.5rem 0 0; padding-left: 1.25rem; display: grid; gap: 0.25rem; list-style: disc; }
+  .terms__ack { margin-top: 1rem; padding: 1.25rem 1.5rem; border-radius: var(--radius-card); background: var(--color-primary-soft); border: 1px solid var(--color-line); }
+  .terms__ack p { margin: 0.4rem 0 0; }
+  .terms__actions { margin-top: 1rem; }
+  @media print {
+    :global(.site-header), :global(.site-footer), .terms__actions { display: none !important; }
+    .terms { max-width: none; }
+  }
+</style>
+
+<script>
+  document.querySelector('[data-print]')?.addEventListener('click', () => window.print());
+</script>

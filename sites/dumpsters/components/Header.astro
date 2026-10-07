@@ -1,0 +1,24 @@
+---
+import SiteHeader from '../../../shared/components/SiteHeader.astro';
+import site from '../data/site.json';
+
+const links = [
+  { href: '/#sizes', label: 'Sizes & Prices' },
+  { href: '/#how', label: 'How It Works' },
+  { href: '/#materials', label: "What Goes In" },
+  { href: '/#faq', label: 'FAQ' },
+  { href: '/#reserve', label: 'Reserve' },
+  { href: site.links.constructionSite, label: 'Construction' },
+];
+---
+<SiteHeader
+  name="Cusumano"
+  sub="Dumpster Rentals · Monroe County"
+  label={site.name}
+  links={links}
+  phone={site.contact.phone}
+  phoneTel={site.contact.phoneTel}
+  menuCta={{ href: '/#reserve', label: 'Reserve a dumpster' }}
+>
+  <svg viewBox="0 0 64 64" width="40" height="40"><rect width="64" height="64" rx="12" fill="#1f4a29"/><path d="M10 26h34l4 16H14z" fill="#8cc63f"/><circle cx="22" cy="46" r="5" fill="#fff"/><circle cx="36" cy="46" r="5" fill="#fff"/><path d="M48 34h6" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg>
+</SiteHeader>

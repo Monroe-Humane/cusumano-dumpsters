@@ -1,0 +1,22 @@
+---
+import site from '../data/site.json';
+---
+<section class="ui-section--dark ui-blueprint stats" aria-label="Why homeowners choose Cusumano">
+  <dl class="ui-container stats__grid">
+    {site.stats.map((s) => (
+      <div class="stats__item">
+        <dt>{s.label}</dt>
+        <dd>{s.value}</dd>
+      </div>
+    ))}
+  </dl>
+</section>
+
+<style>
+  .stats { padding-block: clamp(2rem, 5vw, 3rem); border-top: 4px solid var(--color-accent-bright); }
+  .stats__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem 1rem; margin: 0 auto; }
+  @media (min-width: 768px) { .stats__grid { grid-template-columns: repeat(4, 1fr); } }
+  .stats__item { display: flex; flex-direction: column-reverse; gap: 0.35rem; padding-left: 1rem; border-left: 2px solid rgb(255 255 255 / 0.14); }
+  .stats__item dd { margin: 0; font: 800 clamp(1.8rem, 4vw, 2.6rem)/1 var(--font-display); color: #fff; letter-spacing: -0.02em; }
+  .stats__item dt { font: 600 0.92rem/1.35 var(--font-display); color: #aab6c5; }
+</style>

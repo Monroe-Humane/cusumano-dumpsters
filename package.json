@@ -1,0 +1,27 @@
+{
+  "name": "astrocusumano",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Websites for Cusumano Home Improvements (construction) and Cusumano Dumpster Rentals, Monroe MI.",
+  "scripts": {
+    "dev:construction": "astro dev --host --ignore-lock --config astro.config.construction.mjs",
+    "dev:dumpsters": "astro dev --host --ignore-lock --config astro.config.dumpsters.mjs",
+    "build": "npm run build:construction && npm run build:dumpsters",
+    "build:construction": "astro build --config astro.config.construction.mjs",
+    "build:dumpsters": "astro build --config astro.config.dumpsters.mjs",
+    "check": "npm run check:construction && npm run check:dumpsters",
+    "check:construction": "astro check --config astro.config.construction.mjs",
+    "check:dumpsters": "astro check --config astro.config.dumpsters.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.3.6",
+    "tailwindcss": "^4.3.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "typescript": "^6.0.3"
+  }
+}

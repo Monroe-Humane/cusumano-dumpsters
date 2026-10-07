@@ -1,0 +1,78 @@
+---
+import site from '../data/site.json';
+import Icon from '../../../shared/components/Icon.astro';
+import SectionHead from '../../../shared/components/SectionHead.astro';
+const popular = '15';
+---
+<section class="ui-section" id="sizes" aria-labelledby="sizes-title">
+  <div class="ui-container">
+    <SectionHead
+      id="sizes-title"
+      eyebrow="Sizes & prices"
+      title="Three sizes, simple pricing"
+      lede="Pick a size and how long you need it. Every rental includes delivery, pickup and 2 tons of weight."
+    />
+
+    <div class="sizes__grid">
+      {site.sizes.map((s) => (
+        <article class:list={['ui-card', 'sizes__card', s.id === popular && 'sizes__card--popular']}>
+          {s.id === popular && <span class="sizes__badge">Most popular</span>}
+          <p class="sizes__yards"><strong>{s.yards}</strong> yard</p>
+          <p class="sizes__dims">{s.dimensions}</p>
+          <p class="sizes__good">{s.goodFor}</p>
+          <table class="sizes__table">
+            <caption class="sr-only">{s.yards}-yard dumpster prices</caption>
+            <tbody>
+              {site.rentalDays.map((d) => (
+                <tr>
+                  <th scope="row">{d} days</th>
+                  <td>${s.prices[String(d) as '3' | '5' | '7']}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <a class:list={['ui-btn', s.id === popular ? 'ui-btn--accent' : 'ui-btn--outline', 'mt-auto']} href="#reserve" data-pick-size={s.id}>
+            Reserve a {s.yards}-yard <Icon name="arrow" />
+          </a>
+        </article>
+      ))}
+    </div>
+
+    <ul class="sizes__notes">
+      <li><Icon name="weight" size={18} /> 2 tons included · $75 per extra ton</li>
+      <li><Icon name="calendar" size={18} /> Extra days $50/day, scheduled when you order</li>
+      <li><Icon name="trailer" size={18} /> Payment due at delivery</li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  .sizes__grid { display: grid; gap: 1.25rem; align-items: stretch; }
+  @media (min-width: 820px) { .sizes__grid { grid-template-columns: repeat(3, 1fr); } }
+  .sizes__card { gap: 0.6rem; }
+  .sizes__card--popular { border: 2px solid var(--color-accent); }
+  .sizes__badge {
+    position: absolute;
+    top: -0.8rem;
+    left: 1.5rem;
+    padding: 0.2rem 0.75rem;
+    border-radius: 999px;
+    background: var(--color-accent);
+    color: #fff;
+    font: 700 0.75rem/1.5 var(--font-display);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .sizes__yards { font: 700 1.1rem/1 var(--font-display); color: var(--color-ink) !important; }
+  .sizes__yards strong { font-size: 3.2rem; font-weight: 800; letter-spacing: -0.03em; color: var(--color-primary); margin-right: 0.15rem; }
+  .sizes__dims { font: 700 0.95rem/1.3 var(--font-display); color: var(--color-ink) !important; }
+  .sizes__good { font-size: 0.95rem; }
+  .sizes__table { width: 100%; margin: 0.5rem 0 0.75rem; border-collapse: collapse; }
+  .sizes__table th, .sizes__table td { padding: 0.6rem 0; border-top: 1px solid var(--color-line); }
+  .sizes__table th { text-align: left; font-weight: 600; color: var(--color-muted); }
+  .sizes__table td { text-align: right; font: 800 1.25rem/1 var(--font-display); color: var(--color-ink); }
+
+  .sizes__notes { display: flex; flex-wrap: wrap; gap: 0.75rem 1.75rem; margin: 1.75rem 0 0; padding: 0; list-style: none; font-weight: 600; }
+  .sizes__notes li { display: flex; align-items: center; gap: 0.5rem; }
+  .sizes__notes :global(svg) { color: var(--color-accent); flex: none; }
+</style>

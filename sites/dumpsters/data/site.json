@@ -1,0 +1,328 @@
+{
+  "name": "Cusumano Dumpster Rentals",
+  "legalName": "Cusumano Home Improvements LLC",
+  "url": "https://cusumano-dumpsters.pages.dev",
+  "seo": {
+    "title": "Dumpster Rentals in Monroe, MI | 10, 15 & 20 Yard | Cusumano Dumpster Rentals",
+    "description": "Dumpster rentals in Monroe County, Michigan. 10, 15 and 20 yard dumpsters for 3, 5 or 7 days from $275. Same-day drop-off available, driveway-safe rubber-wheel trailers. Residential and commercial."
+  },
+  "contact": {
+    "phone": "734-777-8158",
+    "phoneTel": "tel:+17347778158",
+    "smsHref": "sms:+17347778158",
+    "email": "copernan@yahoo.com",
+    "street": "2257 Heiss Rd",
+    "city": "Monroe",
+    "state": "MI",
+    "zip": "48162",
+    "areaServed": "Monroe County, MI",
+    "facebook": "https://www.facebook.com/cusumanocement/",
+    "formAction": "https://formsubmit.co/copernan@yahoo.com"
+  },
+  "links": {
+    "constructionSite": "https://cusumanohi.com"
+  },
+  "hero": {
+    "label": "Monroe County · Residential & commercial",
+    "title": "Dumpster rentals, dropped off when you need them.",
+    "copy": "10, 15 and 20 yard dumpsters for 3, 5 or 7 days. Same-day drop-off is available, and our rubber-wheel trailers are driveway-safe.",
+    "fromPrice": 275
+  },
+  "highlights": [
+    "Same-day drop-off available",
+    "Driveway-safe rubber-wheel trailers",
+    "2 tons of weight included",
+    "Pay at delivery"
+  ],
+  "rentalDays": [
+    3,
+    5,
+    7
+  ],
+  "sizes": [
+    {
+      "id": "10",
+      "yards": 10,
+      "dimensions": "7′ × 12′ × 3′",
+      "goodFor": "Garage or basement cleanouts, small remodels",
+      "prices": {
+        "3": 275,
+        "5": 300,
+        "7": 325
+      }
+    },
+    {
+      "id": "15",
+      "yards": 15,
+      "dimensions": "7′ × 14′ × 4′",
+      "goodFor": "Kitchen or bath tear-outs, deck removal, moving cleanouts",
+      "prices": {
+        "3": 300,
+        "5": 325,
+        "7": 350
+      }
+    },
+    {
+      "id": "20",
+      "yards": 20,
+      "dimensions": "7′ × 14′ × 5.5′",
+      "goodFor": "Larger remodels, siding jobs, estate cleanouts",
+      "prices": {
+        "3": 350,
+        "5": 375,
+        "7": 400
+      }
+    }
+  ],
+  "fees": [
+    {
+      "label": "Extra rental day",
+      "amount": "$50 / day",
+      "note": "Schedule extra days when you order."
+    },
+    {
+      "label": "Weight over 2 tons",
+      "amount": "$75 / ton",
+      "note": "Every rental includes 2 tons."
+    },
+    {
+      "label": "Trip charge (dry run)",
+      "amount": "$75",
+      "note": "If we can't deliver or pick up because access is blocked or unsafe."
+    },
+    {
+      "label": "Late cancellation",
+      "amount": "$75",
+      "note": "Cancellations within 24 hours of delivery."
+    }
+  ],
+  "steps": [
+    {
+      "title": "Reserve",
+      "text": "Send a request or call with your size, rental length, date and address. We'll call to confirm."
+    },
+    {
+      "title": "We deliver",
+      "text": "We drop it where it's safe and accessible. Payment is due at delivery."
+    },
+    {
+      "title": "Load it",
+      "text": "Fill it evenly, no higher than the top edge. Keep prohibited items out."
+    },
+    {
+      "title": "We pick it up",
+      "text": "At the end of your rental. Need it sooner or swapped? Give us 24 hours' notice."
+    }
+  ],
+  "materials": {
+    "allowed": [
+      "Household junk and furniture",
+      "Construction and remodeling debris",
+      "Cleanout and moving clutter",
+      "Other non-hazardous solid waste"
+    ],
+    "prohibited": [
+      "Hazardous waste, chemicals or liquids",
+      "Paints, solvents and oils",
+      "Asbestos-containing materials",
+      "Tires and batteries",
+      "Propane tanks or pressurized containers"
+    ],
+    "heavyNote": "Heavy materials such as concrete, dirt, brick and roofing shingles may need special pricing. Tell us before delivery."
+  },
+  "placement": [
+    "Clear access, free of vehicles, debris and obstacles",
+    "Enough room and overhead clearance (watch for wires and branches)",
+    "A permit if it will sit on a public street or right-of-way (customer's responsibility)",
+    "Once placed, please don't move it"
+  ],
+  "faq": [
+    {
+      "q": "How much weight is included?",
+      "a": "Every rental includes 2 tons. Anything over that is $75 per additional ton."
+    },
+    {
+      "q": "Can I keep it longer?",
+      "a": "Yes. Extra days are $50 per day. Please schedule them when you order."
+    },
+    {
+      "q": "When do I pay?",
+      "a": "Full payment is due at delivery. Any extra charges, like overweight or extra days, are billed afterward and due on receipt."
+    },
+    {
+      "q": "What can't go in the dumpster?",
+      "a": "Hazardous waste, chemicals or liquids; paints, solvents and oils; asbestos; tires and batteries; propane tanks or other pressurized containers. Concrete, dirt, brick and shingles may need special pricing, so tell us first."
+    },
+    {
+      "q": "Will it damage my driveway?",
+      "a": "Our rubber-wheel trailers are made to be driveway-safe. As with any heavy delivery, we can't be responsible for surface damage from the dumpster's weight, soft ground or weather."
+    },
+    {
+      "q": "Do I need a permit?",
+      "a": "Not on your own driveway or property. If it will sit on a public street or right-of-way, you'll need to get any required permit."
+    },
+    {
+      "q": "What if I need to cancel?",
+      "a": "Cancelling within 24 hours of the scheduled delivery may carry a $75 fee."
+    },
+    {
+      "q": "Do you rent to businesses?",
+      "a": "Yes. We serve both residential and commercial customers."
+    }
+  ],
+  "terms": {
+    "title": "Dumpster Rental Terms & Conditions",
+    "sections": [
+      {
+        "title": "Rental Period",
+        "paragraphs": [
+          "The standard rental period shall be 3, 5, or 7 days from the date of delivery, as selected by the Customer. Additional rental time will be billed at a rate of $50 per day unless otherwise agreed in writing. Additional days must be scheduled at the time of ordering."
+        ]
+      },
+      {
+        "title": "Payment Terms",
+        "paragraphs": [
+          "Full payment is due at the time of delivery. Customer agrees that any additional charges, including but not limited to overage fees, damages, or trip charges, will be billed and are due upon receipt."
+        ]
+      },
+      {
+        "title": "Weight Limit & Overage Charges",
+        "paragraphs": [
+          "Each dumpster rental includes a weight limit of 2 tons. Any weight exceeding this limit will be charged at a rate of $75 per additional ton."
+        ]
+      },
+      {
+        "title": "Acceptable & Prohibited Materials",
+        "paragraphs": [
+          "Customer agrees to only dispose of non-hazardous solid waste. The following materials are strictly prohibited:"
+        ],
+        "list": [
+          "Hazardous waste, chemicals, or liquids",
+          "Paints, solvents, and oils",
+          "Asbestos-containing materials",
+          "Tires and batteries",
+          "Propane tanks or pressurized containers"
+        ],
+        "after": [
+          "Heavy materials such as concrete, dirt, brick, and roofing shingles may require special pricing and must be disclosed prior to delivery."
+        ]
+      },
+      {
+        "title": "Load Level Requirement",
+        "paragraphs": [
+          "All materials must be loaded evenly and must not exceed the top edge (rim) of the dumpster. Overfilled or improperly loaded dumpsters may be refused for pickup and subject to additional charges."
+        ]
+      },
+      {
+        "title": "Placement & Site Conditions",
+        "paragraphs": [
+          "Customer is responsible for providing a safe, accessible location for delivery and pickup. This includes:"
+        ],
+        "list": [
+          "Clear access free of vehicles, debris, or obstacles",
+          "Adequate space and overhead clearance"
+        ],
+        "after": [
+          "Cusumano Home Improvements LLC is not responsible for damage to driveways, lawns, or surfaces due to the weight of the dumpster or normal delivery conditions."
+        ]
+      },
+      {
+        "title": "Permits & Regulations",
+        "paragraphs": [
+          "Customer is responsible for obtaining any required permits if the dumpster is to be placed on a public street or right-of-way and must comply with all local, state, and federal regulations."
+        ]
+      },
+      {
+        "title": "Damage & Liability",
+        "paragraphs": [
+          "Customer assumes full responsibility for any damage to the dumpster beyond normal wear and tear. Customer also assumes liability for any injuries, damages, or losses arising from use or misuse of the dumpster while on site."
+        ]
+      },
+      {
+        "title": "Unauthorized Relocation",
+        "paragraphs": [
+          "Dumpster placement is final upon delivery. Customer shall not move or attempt to move the dumpster. Unauthorized relocation may result in additional charges and/or liability for damages."
+        ]
+      },
+      {
+        "title": "Trip Charges / Dry Runs",
+        "paragraphs": [
+          "If delivery or pickup cannot be completed due to blocked access, unsafe conditions, or customer fault, a trip charge of $75 will apply."
+        ]
+      },
+      {
+        "title": "Weather & Ground Conditions",
+        "paragraphs": [
+          "Cusumano Home Improvements LLC is not responsible for damage caused by soft ground, sinking, weather conditions, or surface failure during the rental period."
+        ]
+      },
+      {
+        "title": "Cancellation Policy",
+        "paragraphs": [
+          "Cancellations made within 24 hours of scheduled delivery may be subject to a cancellation fee of $75."
+        ]
+      },
+      {
+        "title": "Responsibility for Contents",
+        "paragraphs": [
+          "Customer is responsible for all materials placed in the dumpster, including materials disposed of by third parties."
+        ]
+      },
+      {
+        "title": "Early Pickup / Swap Requests",
+        "paragraphs": [
+          "Customer must provide a minimum of 24 hours notice for early pickup or dumpster swap requests. Additional fees may apply."
+        ]
+      },
+      {
+        "title": "Refusal of Service",
+        "paragraphs": [
+          "Cusumano Home Improvements LLC reserves the right to refuse service or pickup of any dumpster that is:"
+        ],
+        "list": [
+          "Overloaded",
+          "Contains prohibited materials",
+          "Deemed unsafe to transport"
+        ]
+      }
+    ],
+    "acknowledgment": "By accepting delivery of a dumpster from Cusumano Home Improvements LLC, the Customer acknowledges and agrees to all terms and conditions stated above."
+  },
+  "reviews": {
+    "rating": "5.0",
+    "count": 90,
+    "url": "https://maps.google.com/?cid=3055226641782584202",
+    "items": [
+      {
+        "quote": "Called him on a Sunday after basement flooded, had dumpster here within an hour!! Super reasonable price and great communication.",
+        "name": "Sara L.",
+        "project": "Flood cleanup"
+      },
+      {
+        "quote": "All other dumpster places were booked until the following week. Sal and his crew brought a dumpster the same day so I could clean up the job site.",
+        "name": "Jesse B.",
+        "project": "Demo project"
+      },
+      {
+        "quote": "I couldn't believe how quiet they were when dropping it off and picking it up! My dogs never made a peep and it went right next to the house!",
+        "name": "Joanne",
+        "project": "Home cleanout"
+      },
+      {
+        "quote": "They placed the dumpster in the best location, saving me a lot of time. It was easy to load from the open doors on the back.",
+        "name": "Kevin C.",
+        "project": "Short-notice rental"
+      },
+      {
+        "quote": "Scheduling the dumpster delivery and pick up via text was very easy and convenient. Service was prompt and efficient.",
+        "name": "John S.",
+        "project": "Rental"
+      },
+      {
+        "quote": "The dumpster was delivered on time, picked up promptly, and the whole process was easy and hassle-free. Great pricing and excellent communication.",
+        "name": "Amy R.",
+        "project": "Renovation cleanup"
+      }
+    ]
+  }
+}

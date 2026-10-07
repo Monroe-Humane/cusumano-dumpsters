@@ -1,0 +1,51 @@
+---
+// Page skeleton shared by both sites: meta tags, fonts, structured data, skip link.
+// Each site wraps this in its own layouts/Layout.astro, which imports that site's
+// stylesheet and passes its business details.
+import { Font } from 'astro:assets';
+
+interface Props {
+  title: string;
+  description: string;
+  siteName: string;
+  /** Absolute URL of the social share image. */
+  ogImage?: string | URL;
+  themeColor?: string;
+  /** schema.org objects, one <script type="application/ld+json"> each. */
+  jsonLd?: object[];
+  noindex?: boolean;
+}
+const { title, description, siteName, ogImage, themeColor = '#111a25', jsonLd = [], noindex = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta name="theme-color" content={themeColor} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+
+    <!-- Preload only what the first screen needs: headline weight and body text. -->
+    <Font cssVariable="--font-archivo" preload={[{ weight: 800 }]} />
+    <Font cssVariable="--font-source-sans" preload={[{ weight: 400 }]} />
+
+    {!noindex && jsonLd.map((data) => <script type="application/ld+json" set:html={JSON.stringify(data)} />)}
+  </head>
+  <body>
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-[100] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:font-bold">Skip to content</a>
+    <slot />
+  </body>
+</html>

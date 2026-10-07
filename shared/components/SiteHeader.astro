@@ -1,0 +1,157 @@
+---
+// Sticky header with phone menu, shared by both sites. Each site passes its own name,
+// links and logo mark (default slot).
+import Icon from './Icon.astro';
+
+interface Props {
+  /** Big wordmark, e.g. "Cusumano". */
+  name: string;
+  /** Small line under it, e.g. "Home Improvements · Since 1974". */
+  sub: string;
+  /** Full business name, shown as the logo link's tooltip. */
+  label: string;
+  links: { href: string; label: string }[];
+  phone: string;
+  phoneTel: string;
+  /** Extra button shown at the bottom of the phone menu. */
+  menuCta: { href: string; label: string };
+}
+const { name, sub, label, links, phone, phoneTel, menuCta } = Astro.props;
+---
+<header class="site-header" data-header>
+  <div class="ui-container site-header__bar">
+    <a href="/#top" class="brand" title={`${label}: back to top`}>
+      <span class="brand__mark" aria-hidden="true">
+        <slot />
+      </span>
+      <span class="brand__text">
+        <span class="brand__name">{name}</span>
+        <span class="brand__sub">{sub}</span>
+      </span>
+    </a>
+
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <ul>
+        {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      </ul>
+      <a class="ui-btn ui-btn--primary ui-btn--sm site-nav__quote" href={menuCta.href}>{menuCta.label}</a>
+    </nav>
+
+    <div class="site-header__actions">
+      <a class="ui-btn ui-btn--accent ui-btn--sm" href={phoneTel}>
+        <Icon name="phone" size={18} />
+        <span class="hidden sm:inline">{phone}</span>
+        <span class="sm:hidden">Call</span>
+      </a>
+      <button type="button" class="menu-btn" aria-controls="site-nav" aria-expanded="false" data-menu-btn>
+        <span class="sr-only">Menu</span>
+        <span class="menu-btn__open"><Icon name="menu" size={24} /></span>
+        <span class="menu-btn__close"><Icon name="close" size={24} /></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgb(247 245 240 / 0.92);
+    backdrop-filter: saturate(1.4) blur(10px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .site-header.is-scrolled { border-color: var(--color-line); box-shadow: 0 6px 20px rgb(28 36 48 / 0.06); }
+  .site-header__bar { display: flex; align-items: center; gap: 1rem; min-height: 68px; }
+
+  .brand { display: flex; align-items: center; gap: 0.7rem; color: var(--color-ink); text-decoration: none; margin-right: auto; }
+  .brand__mark { display: flex; flex: none; }
+  .brand__text { display: grid; line-height: 1.05; }
+  .brand__name { font: 800 1.35rem/1 var(--font-display); letter-spacing: -0.01em; text-transform: uppercase; }
+  .brand__sub { white-space: nowrap; font: 600 0.72rem/1.4 var(--font-display); letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-muted); }
+
+  .site-nav ul { display: flex; gap: 0.25rem; margin: 0; padding: 0; list-style: none; }
+  .site-nav a:not(.ui-btn) {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    color: var(--color-ink);
+    font: 600 0.98rem/1.2 var(--font-display);
+    text-decoration: none;
+  }
+  .site-nav a:not(.ui-btn):hover { background: var(--color-paper-200); }
+  .site-nav__quote { display: none; }
+  .site-header__actions { display: flex; flex: none; align-items: center; gap: 0.5rem; }
+  .site-header__actions .ui-btn { white-space: nowrap; }
+
+  .menu-btn {
+    display: none;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 1.5px solid var(--color-line);
+    border-radius: 10px;
+    background: #fff;
+    color: var(--color-ink);
+    cursor: pointer;
+  }
+  .menu-btn__close { display: none; }
+  .menu-btn[aria-expanded='true'] .menu-btn__open { display: none; }
+  .menu-btn[aria-expanded='true'] .menu-btn__close { display: flex; }
+  .menu-btn__open { display: flex; }
+
+  @media (min-width: 1240px) {
+    .site-nav { display: flex; flex: none; align-items: center; }
+    .site-nav a:not(.ui-btn) { white-space: nowrap; padding-inline: 0.6rem; }
+  }
+  @media (max-width: 1239px) {
+    .menu-btn { display: grid; }
+    .brand__sub { display: none; }
+    .site-nav {
+      display: none;
+      position: absolute;
+      inset: 100% 0 auto;
+      padding: 0.75rem max(1rem, 4vw) 1.25rem;
+      background: var(--color-paper);
+      border-bottom: 1px solid var(--color-line);
+      box-shadow: 0 16px 30px rgb(28 36 48 / 0.12);
+    }
+    .site-nav.is-open { display: grid; gap: 0.75rem; }
+    .site-nav ul { flex-direction: column; }
+    .site-nav a:not(.ui-btn) { padding: 0.8rem 0.5rem; font-size: 1.1rem; border-bottom: 1px solid var(--color-line); border-radius: 0; }
+    .site-nav__quote { display: inline-flex; }
+  }
+</style>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  const btn = document.querySelector<HTMLButtonElement>('[data-menu-btn]');
+  const nav = document.getElementById('site-nav');
+
+  if (header) {
+    const setHeight = () => document.documentElement.style.setProperty('--header-h', `${header.offsetHeight}px`);
+    const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 8);
+    // Measure after first paint so reading the height doesn't force an extra layout during load.
+    requestAnimationFrame(() => {
+      setHeight();
+      onScroll();
+    });
+    window.addEventListener('resize', setHeight, { passive: true });
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  if (btn && nav) {
+    const setOpen = (open: boolean) => {
+      btn.setAttribute('aria-expanded', String(open));
+      nav.classList.toggle('is-open', open);
+    };
+    btn.addEventListener('click', () => setOpen(btn.getAttribute('aria-expanded') !== 'true'));
+    nav.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest('a')) setOpen(false);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') setOpen(false);
+    });
+  }
+</script>

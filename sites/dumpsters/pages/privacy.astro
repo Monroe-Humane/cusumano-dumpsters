@@ -1,0 +1,24 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PrivacyPolicy from '../../../shared/components/PrivacyPolicy.astro';
+import site from '../data/site.json';
+const { contact } = site;
+---
+<Layout title={`Privacy Policy | ${site.name}`} description={`How ${site.name} handles information sent through this website.`}>
+  <Header />
+  <main id="main" class="ui-section">
+    <PrivacyPolicy
+      businessName={site.name}
+      legalName={site.legalName}
+      email={contact.email}
+      phone={contact.phone}
+      phoneTel={contact.phoneTel}
+      address={`${contact.street}, ${contact.city}, ${contact.state} ${contact.zip}`}
+      formCollects="your name, phone number, optional email address, delivery address and date, the dumpster size and rental length you chose, what you plan to throw out and any placement notes"
+      updated="October 2026"
+    />
+  </main>
+  <Footer />
+</Layout>

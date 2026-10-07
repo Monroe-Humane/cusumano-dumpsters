@@ -1,0 +1,58 @@
+---
+import '../styles/site.css';
+import BaseLayout from '../../../shared/layouts/BaseLayout.astro';
+import site from '../data/site.json';
+
+interface Props {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+}
+const { title = site.seo.title, description = site.seo.description, noindex = false } = Astro.props;
+// Social share card, built by scripts/og-dumpsters.mjs (re-run it after changing prices).
+const ogImage = new URL('/og.png', Astro.site);
+
+// Business details for search engines, including one offer per dumpster size (3-day price).
+const business = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: site.name,
+  legalName: site.legalName,
+  url: site.url,
+  telephone: site.contact.phone,
+  email: site.contact.email,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: site.contact.street,
+    addressLocality: site.contact.city,
+    addressRegion: site.contact.state,
+    postalCode: site.contact.zip,
+    addressCountry: 'US',
+  },
+  areaServed: site.contact.areaServed,
+  parentOrganization: { '@type': 'Organization', name: site.legalName, url: site.links.constructionSite },
+  makesOffer: site.sizes.map((s) => ({
+    '@type': 'Offer',
+    name: `${s.yards}-yard dumpster rental (3 days)`,
+    price: s.prices['3'],
+    priceCurrency: 'USD',
+    itemOffered: { '@type': 'Service', name: `${s.yards}-yard dumpster rental` },
+  })),
+};
+const faq = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: site.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+};
+---
+<BaseLayout
+  title={title}
+  description={description}
+  siteName={site.name}
+  ogImage={ogImage}
+  themeColor="#121c15"
+  jsonLd={[business, faq]}
+  noindex={noindex}
+>
+  <slot />
+</BaseLayout>
