@@ -5,8 +5,8 @@ No database, no server, no API keys.
 
 | Site | Folder | Live address | Look |
 |---|---|---|---|
-| **Cusumano Home Improvements** (construction) | `sites/construction/` | https://cusumanohi.com | navy + orange |
-| **Cusumano Dumpster Rentals** | `sites/dumpsters/` | placeholder: https://cusumano-dumpsters.pages.dev | green |
+| **Cusumano Home Improvements** (construction) | `sites/construction/` | https://cusumanohi.com | charcoal + logo gold |
+| **Cusumano Dumpster Rentals** | `sites/dumpsters/` | placeholder: https://cusumano-dumpsters.pages.dev | charcoal + logo lime |
 
 Each site links to the other (header, services band, footer).
 
@@ -17,8 +17,9 @@ astro.config.construction.mjs   one config per site (folders, address, dev port)
 astro.config.dumpsters.mjs
 astro.config.shared.mjs         settings both share
 shared/                         used by both sites
-  styles/base.css               design tokens (colours, fonts) and .ui-* classes: buttons, cards, headings
-  components/                   Icon, SectionHead, SiteHeader (sticky header + phone menu), Faq
+  styles/base.css               design tokens and .ui-* classes. Charcoal + off-white shared; each site sets
+                                one accent (--color-accent) in its styles/site.css. Oswald headings, Source Sans body.
+  components/                   Icon, SectionHead, SiteHeader, Faq, Reviews, PageHeader, PrivacyPolicy
   layouts/BaseLayout.astro      <head>, meta tags, fonts, search-engine data
 sites/construction/
   data/site.json                ALL text: services, gallery, FAQ, contact, address

@@ -1,8 +1,8 @@
 ---
+import { Picture } from 'astro:assets';
 import site from '../data/site.json';
 import Icon from '../../../shared/components/Icon.astro';
 import SectionHead from '../../../shared/components/SectionHead.astro';
-import { Picture } from 'astro:assets';
 import black from '../assets/trailer-black.jpg';
 import pair from '../assets/trailers-pair.jpg';
 
@@ -11,51 +11,78 @@ const fleet = [
   { src: pair, alt: 'Black and red Cusumano dump trailers parked side by side', caption: 'Our trailers, ready for delivery' },
 ];
 const popular = '15';
+
+// Side-view diagram drawn to scale from the dimensions ("7′ × 14′ × 4′" = width × length × height).
+const dims = (d: string) => {
+  const [w, l, h] = (d.match(/[\d.]+/g) ?? []).map(Number);
+  return { w, l, h };
+};
+const maxL = Math.max(...site.sizes.map((s) => dims(s.dimensions).l));
+const maxH = Math.max(...site.sizes.map((s) => dims(s.dimensions).h));
+const box = (d: string) => {
+  const { l, h } = dims(d);
+  const bw = Math.round((l / maxL) * 220);
+  const bh = Math.round((h / maxH) * 78);
+  return { bw, bh, x: 250 - bw - 10, y: 96 - bh };
+};
 ---
 <section class="ui-section" id="sizes" aria-labelledby="sizes-title">
   <div class="ui-container">
     <SectionHead
       id="sizes-title"
       eyebrow="Sizes & prices"
-      title="Three sizes, simple pricing"
-      lede="Pick a size and how long you need it. Every rental includes delivery, pickup and 2 tons of weight."
+      title="Three sizes. Simple pricing."
+      lede="Pick a size and how long you need it. Every rental includes delivery, pickup and 2 tons of weight. Pay when we deliver."
     />
 
     <div class="sizes__grid">
-      {site.sizes.map((s) => (
-        <article class:list={['ui-card', 'sizes__card', s.id === popular && 'sizes__card--popular']}>
-          {s.id === popular && <span class="sizes__badge">Most popular</span>}
-          <p class="sizes__yards"><strong>{s.yards}</strong> yard</p>
-          <p class="sizes__dims">{s.dimensions}</p>
-          <p class="sizes__good">{s.goodFor}</p>
-          <table class="sizes__table">
-            <caption class="sr-only">{s.yards}-yard dumpster prices</caption>
-            <tbody>
-              {site.rentalDays.map((d) => (
-                <tr>
-                  <th scope="row">{d} days</th>
-                  <td>${s.prices[String(d) as '3' | '5' | '7']}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <a class:list={['ui-btn', s.id === popular ? 'ui-btn--accent' : 'ui-btn--outline', 'mt-auto']} href="#reserve" data-pick-size={s.id}>
-            Reserve a {s.yards}-yard <Icon name="arrow" />
-          </a>
-        </article>
-      ))}
+      {site.sizes.map((s) => {
+        const b = box(s.dimensions);
+        return (
+          <article class:list={['sizes__card', s.id === popular && 'sizes__card--popular']}>
+            {s.id === popular && <span class="sizes__badge">Most popular</span>}
+            <div class="sizes__top">
+              <p class="sizes__yards"><strong>{s.yards}</strong><span>yard</span></p>
+              <svg class="sizes__diagram" viewBox="0 0 260 120" role="img" aria-label={`${s.yards}-yard dumpster, ${s.dimensions}, drawn to scale`}>
+                <rect x={b.x} y={b.y} width={b.bw} height={b.bh} rx="3" class="sizes__box" />
+                <rect x={b.x} y={b.y} width={b.bw} height="6" class="sizes__rim" />
+                <line x1="14" y1="100" x2="244" y2="100" class="sizes__frame" />
+                <line x1="2" y1="100" x2="20" y2="100" class="sizes__frame" />
+                <circle cx="170" cy="106" r="11" class="sizes__wheel" />
+                <circle cx="198" cy="106" r="11" class="sizes__wheel" />
+              </svg>
+            </div>
+            <p class="sizes__dims">{s.dimensions}</p>
+            <p class="sizes__good">{s.goodFor}</p>
+            <table class="sizes__table">
+              <caption class="sr-only">{s.yards}-yard dumpster prices</caption>
+              <tbody>
+                {site.rentalDays.map((d) => (
+                  <tr>
+                    <th scope="row">{d} days</th>
+                    <td>${s.prices[String(d) as '3' | '5' | '7']}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <a class:list={['ui-btn', s.id === popular ? 'ui-btn--accent' : 'ui-btn--outline']} href="#reserve" data-pick-size={s.id}>
+              Reserve a {s.yards}-yard <Icon name="arrow" />
+            </a>
+          </article>
+        );
+      })}
     </div>
 
     <ul class="sizes__notes">
-      <li><Icon name="weight" size={18} /> 2 tons included · $75 per extra ton</li>
-      <li><Icon name="calendar" size={18} /> Extra days $50/day, scheduled when you order</li>
-      <li><Icon name="trailer" size={18} /> Payment due at delivery</li>
+      <li><Icon name="weight" size={20} /> 2 tons included · $75 per extra ton</li>
+      <li><Icon name="calendar" size={20} /> Extra days $50/day, scheduled when you order</li>
+      <li><Icon name="trailer" size={20} /> Payment due at delivery</li>
     </ul>
 
     <div class="sizes__fleet">
       {fleet.map((f) => (
         <figure>
-          <Picture src={f.src} alt={f.alt} formats={['avif', 'webp']} widths={[480, 800, 1200]} sizes="(min-width: 760px) 560px, 92vw" loading="lazy" />
+          <Picture src={f.src} alt={f.alt} formats={['avif', 'webp']} widths={[480, 800, 1200]} sizes="(min-width: 760px) 580px, 92vw" loading="lazy" />
           <figcaption>{f.caption}</figcaption>
         </figure>
       ))}
@@ -64,45 +91,84 @@ const popular = '15';
 </section>
 
 <style>
-  .sizes__grid { display: grid; gap: 1.25rem; align-items: stretch; }
-  @media (min-width: 820px) { .sizes__grid { grid-template-columns: repeat(3, 1fr); } }
-  .sizes__card { gap: 0.6rem; }
-  .sizes__card--popular { border: 2px solid var(--color-accent); }
+  .sizes__grid { display: grid; gap: 1.5rem; align-items: stretch; }
+  @media (min-width: 880px) { .sizes__grid { grid-template-columns: repeat(3, 1fr); align-items: center; } }
+  .sizes__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    padding: clamp(1.5rem, 3vw, 2rem);
+    border-radius: var(--radius-card);
+    background: #fff;
+    border: 1px solid var(--color-line);
+    box-shadow: var(--shadow-card);
+  }
+  .sizes__card--popular {
+    background: var(--color-dark);
+    border-color: var(--color-dark);
+    color: var(--color-on-dark);
+    box-shadow: var(--shadow-lift);
+  }
+  @media (min-width: 880px) { .sizes__card--popular { padding-block: 2.6rem; } }
   .sizes__badge {
     position: absolute;
-    top: -0.8rem;
-    left: 1.5rem;
-    padding: 0.2rem 0.75rem;
+    top: -0.85rem;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.3rem 0.9rem;
     border-radius: 999px;
     background: var(--color-accent);
-    color: #fff;
-    font: 700 0.75rem/1.5 var(--font-display);
-    letter-spacing: 0.06em;
+    color: var(--color-on-accent);
+    font: 600 0.78rem/1.4 var(--font-display);
+    letter-spacing: 0.14em;
     text-transform: uppercase;
+    white-space: nowrap;
   }
-  .sizes__yards { font: 700 1.1rem/1 var(--font-display); color: var(--color-ink) !important; }
-  .sizes__yards strong { font-size: 3.2rem; font-weight: 800; letter-spacing: -0.03em; color: var(--color-primary); margin-right: 0.15rem; }
-  .sizes__dims { font: 700 0.95rem/1.3 var(--font-display); color: var(--color-ink) !important; }
-  .sizes__good { font-size: 0.95rem; }
-  .sizes__table { width: 100%; margin: 0.5rem 0 0.75rem; border-collapse: collapse; }
-  .sizes__table th, .sizes__table td { padding: 0.6rem 0; border-top: 1px solid var(--color-line); }
-  .sizes__table th { text-align: left; font-weight: 600; color: var(--color-muted); }
-  .sizes__table td { text-align: right; font: 800 1.25rem/1 var(--font-display); color: var(--color-ink); }
+  .sizes__top { display: flex; align-items: flex-end; justify-content: space-between; gap: 0.5rem; }
+  .sizes__yards { display: flex; align-items: baseline; gap: 0.35rem; margin: 0; }
+  .sizes__yards strong { font: 700 4.2rem/0.9 var(--font-display); }
+  .sizes__yards span { font: 600 1.1rem/1 var(--font-display); letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-muted); }
+  .sizes__card--popular .sizes__yards strong { color: var(--color-accent); }
+  .sizes__card--popular .sizes__yards span { color: var(--color-on-dark-muted); }
+  .sizes__diagram { width: 55%; max-width: 170px; height: auto; }
+  .sizes__box { fill: var(--color-accent); stroke: var(--color-ink); stroke-width: 3; }
+  .sizes__rim { fill: var(--color-ink); }
+  .sizes__frame { stroke: var(--color-ink); stroke-width: 5; stroke-linecap: round; }
+  .sizes__wheel { fill: var(--color-ink); stroke: #fff; stroke-width: 3; }
+  .sizes__card--popular .sizes__box { stroke: #fff; }
+  .sizes__card--popular .sizes__rim, .sizes__card--popular .sizes__wheel { fill: #fff; stroke: var(--color-dark); }
+  .sizes__card--popular .sizes__frame { stroke: #fff; }
 
-  .sizes__notes { display: flex; flex-wrap: wrap; gap: 0.75rem 1.75rem; margin: 1.75rem 0 0; padding: 0; list-style: none; font-weight: 600; }
+  .sizes__dims { margin: 0; font: 600 1.05rem/1.3 var(--font-display); letter-spacing: 0.06em; }
+  .sizes__good { margin: 0; font-size: 0.97rem; color: var(--color-muted); }
+  .sizes__card--popular .sizes__good { color: var(--color-on-dark-muted); }
+  .sizes__table { width: 100%; margin: 0.4rem 0 0.9rem; border-collapse: collapse; }
+  .sizes__table th, .sizes__table td { padding: 0.7rem 0; border-top: 1px solid var(--color-line); }
+  .sizes__card--popular .sizes__table th, .sizes__card--popular .sizes__table td { border-color: rgb(255 255 255 / 0.12); }
+  .sizes__table th { text-align: left; font: 500 0.95rem/1 var(--font-display); letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-muted); }
+  .sizes__card--popular .sizes__table th { color: var(--color-on-dark-muted); }
+  .sizes__table td { text-align: right; font: 700 1.6rem/1 var(--font-display); }
+  .sizes__card .ui-btn { margin-top: auto; }
+  .sizes__card--popular .ui-btn--outline { color: #fff; border-color: #fff; }
+
+  .sizes__notes { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem 2rem; margin: 2.25rem 0 0; padding: 0; list-style: none; font-weight: 600; }
   .sizes__notes li { display: flex; align-items: center; gap: 0.5rem; }
-  .sizes__notes :global(svg) { color: var(--color-accent); flex: none; }
+  .sizes__notes :global(svg) { color: var(--color-accent-ink); flex: none; }
 
-  .sizes__fleet { display: grid; gap: 1.25rem; margin-top: clamp(2rem, 4vw, 2.75rem); }
+  .sizes__fleet { display: grid; gap: 1.25rem; margin-top: clamp(2.5rem, 5vw, 3.5rem); }
   @media (min-width: 760px) { .sizes__fleet { grid-template-columns: 1fr 1fr; } }
   .sizes__fleet figure { margin: 0; position: relative; overflow: hidden; border-radius: var(--radius-card); }
-  .sizes__fleet :global(img) { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+  .sizes__fleet :global(img) { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform 0.6s ease; }
+  .sizes__fleet figure:hover :global(img) { transform: scale(1.04); }
   .sizes__fleet figcaption {
     position: absolute;
     inset: auto 0 0;
-    padding: 2.5rem 1.1rem 0.9rem;
-    background: linear-gradient(transparent, rgb(10 16 12 / 0.85));
+    padding: 3rem 1.25rem 1rem;
+    background: linear-gradient(transparent, rgb(10 11 13 / 0.88));
     color: #fff;
-    font: 700 1rem/1.3 var(--font-display);
+    font: 600 1.15rem/1.3 var(--font-display);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
   }
 </style>

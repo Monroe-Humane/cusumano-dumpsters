@@ -28,10 +28,11 @@
   },
   "hero": {
     "label": "Family-owned in Monroe since 1974",
-    "title": "Built right the first time, for over 50 years.",
+    "title": "Built right the first time",
     "copy": "Garages, pole barns, additions, porches, pergolas, concrete and siding for homeowners across Monroe County, from the family that's been doing it for three generations.",
     "image": "garage-covered-porch.jpg",
-    "imageAlt": "Detached garage with an attached covered porch and brick columns, built by Cusumano Home Improvements"
+    "imageAlt": "Detached garage with an attached covered porch and brick columns, built by Cusumano Home Improvements",
+    "titleMark": "for 50+ years."
   },
   "stats": [
     {
@@ -61,7 +62,8 @@
         "Sheds",
         "Pole Barns",
         "Carports"
-      ]
+      ],
+      "image": "three-car-garage.jpg"
     },
     {
       "title": "Porches, Patio Covers & Pergolas",
@@ -71,7 +73,8 @@
         "Porches",
         "Patio Covers",
         "Pergolas"
-      ]
+      ],
+      "image": "front-porch.jpg"
     },
     {
       "title": "Concrete & Foundations",
@@ -82,7 +85,8 @@
         "Driveways",
         "Patios",
         "Sidewalks"
-      ]
+      ],
+      "image": "patio-pergola.jpg"
     },
     {
       "title": "Additions & Siding",
@@ -91,7 +95,8 @@
       "services": [
         "Additions",
         "Siding"
-      ]
+      ],
+      "image": "two-car-garage.jpg"
     }
   ],
   "dumpsters": {
@@ -253,5 +258,23 @@
         "project": "Garage"
       }
     ]
-  }
+  },
+  "process": [
+    {
+      "title": "Free estimate",
+      "text": "Call or send a request. We come out, look at the site and talk through what you want."
+    },
+    {
+      "title": "Clear quote",
+      "text": "You get a straightforward price and a realistic timeline before any work starts."
+    },
+    {
+      "title": "Family crew builds it",
+      "text": "The family that quotes your job is on site doing it, start to finish."
+    },
+    {
+      "title": "Clean finish",
+      "text": "We clean up as we go and walk the finished project with you."
+    }
+  ]
 }

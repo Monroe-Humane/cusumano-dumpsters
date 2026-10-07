@@ -6,7 +6,7 @@ const { contact } = site;
 // FormSubmit sends each message to the inbox in formAction, then returns the visitor to /thanks/.
 const thanksUrl = new URL('/thanks/', Astro.site).href;
 ---
-<section class="ui-section" id="contact" aria-labelledby="contact-title">
+<section class="ui-section ui-section--dark ui-blueprint contact" id="contact" aria-labelledby="contact-title">
   <div class="ui-container contact__grid">
     <div class="contact__info">
       <SectionHead
@@ -43,6 +43,7 @@ const thanksUrl = new URL('/thanks/', Astro.site).href;
 
     <form class="ui-card contact__form" action={contact.formAction} method="POST" data-contact-form>
       <h3 class="ui-h3">Request a free estimate</h3>
+      <p class="contact__sub">Takes about a minute. No obligation.</p>
       <input type="hidden" name="_subject" value="New estimate request from cusumanohi.com" />
       <input type="hidden" name="_next" value={thanksUrl} />
       <input type="hidden" name="_template" value="table" />
@@ -81,25 +82,29 @@ const thanksUrl = new URL('/thanks/', Astro.site).href;
 </section>
 
 <style>
-  .contact__grid { display: grid; gap: clamp(2rem, 5vw, 3.5rem); align-items: start; }
+  .contact__grid { display: grid; gap: clamp(2.5rem, 5vw, 4rem); align-items: start; }
   @media (min-width: 960px) { .contact__grid { grid-template-columns: 1fr 1fr; } }
-  .contact__info :global(.ui-section-head) { margin-bottom: 1.75rem; }
+  .contact__info :global(.ui-section-head) { margin-bottom: 2rem; }
+  .contact__info :global(.ui-h2) { color: #fff; }
 
-  .contact__list { display: grid; gap: 1rem; margin: 0 0 1.75rem; padding: 0; list-style: none; }
-  .contact__list li { display: flex; gap: 0.9rem; align-items: center; }
+  .contact__list { display: grid; gap: 1.1rem; margin: 0 0 2rem; padding: 0; list-style: none; }
+  .contact__list li { display: flex; gap: 1rem; align-items: center; }
+  .contact__list :global(.ui-icon-badge) { background: var(--color-accent); color: var(--color-on-accent); }
   .contact__list div { display: grid; }
-  .contact__k { font: 700 0.75rem/1.3 var(--font-display); letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-muted); }
-  .contact__list a { font: 700 1.15rem/1.35 var(--font-display); color: var(--color-ink); text-decoration: none; overflow-wrap: anywhere; }
+  .contact__k { font: 500 0.78rem/1.3 var(--font-display); letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-on-dark-muted); }
+  .contact__list a { font: 600 1.3rem/1.3 var(--font-display); letter-spacing: 0.02em; color: #fff; text-decoration: none; overflow-wrap: anywhere; }
   .contact__list a:hover { color: var(--color-accent); }
 
-  .contact__map { overflow: hidden; border-radius: var(--radius-card); border: 1px solid var(--color-line); background: var(--color-paper-200); }
-  .contact__map iframe { display: block; width: 100%; height: 280px; border: 0; }
+  .contact__map { overflow: hidden; border-radius: var(--radius-card); border: 1px solid rgb(255 255 255 / 0.12); background: var(--color-dark-2); }
+  .contact__map iframe { display: block; width: 100%; height: 280px; border: 0; filter: grayscale(0.35) contrast(1.05); }
 
-  .contact__form { gap: 1.1rem; border-top: 5px solid var(--color-accent-bright); }
-  .contact__row { display: grid; gap: 1.1rem; }
+  .contact__form { gap: 1.15rem; border: 0; border-top: 6px solid var(--color-accent); box-shadow: 0 30px 60px -20px rgb(0 0 0 / 0.5); }
+  .contact__form .ui-h3 { font-size: 1.6rem; }
+  .contact__sub { margin-top: -0.6rem !important; }
+  .contact__row { display: grid; gap: 1.15rem; }
   @media (min-width: 560px) { .contact__row { grid-template-columns: 1fr 1fr; } }
   .contact__fine { font-size: 0.88rem; text-align: center; }
-  .contact__fine a { color: var(--color-primary); font-weight: 600; text-decoration: underline; }
+  .contact__fine a { color: var(--color-ink); font-weight: 600; text-decoration: underline; }
 </style>
 
 <script>

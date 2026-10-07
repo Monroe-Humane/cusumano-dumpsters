@@ -21,9 +21,9 @@ import site from '../data/site.json';
     <Materials />
     <Reviews reviews={site.reviews} title="Customers say it's easy" />
     <Faq items={site.faq} title="Dumpster rental questions">
-      More detail in the <a href="/terms/">rental terms</a>, or <a href={site.contact.phoneTel}>call {site.contact.phone}</a>.
+      <span><a href={site.contact.phoneTel}>Call or text {site.contact.phone}</a>, or read the full <a href="/terms/">rental terms</a>.</span>
     </Faq>
     <Reserve />
   </main>
-  <Footer />
+  <Footer cta={false} />
 </Layout>

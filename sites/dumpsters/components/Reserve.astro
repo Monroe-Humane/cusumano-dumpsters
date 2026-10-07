@@ -9,7 +9,7 @@ const prices = Object.fromEntries(site.sizes.map((s) => [s.id, s.prices]));
 const defaultSize = '15';
 const defaultDays = '3';
 ---
-<section class="ui-section ui-section--tint" id="reserve" aria-labelledby="reserve-title">
+<section class="ui-section ui-section--dark ui-blueprint" id="reserve" aria-labelledby="reserve-title">
   <div class="ui-container reserve__grid">
     <div class="reserve__intro">
       <SectionHead
@@ -121,19 +121,21 @@ const defaultDays = '3';
 </section>
 
 <style>
-  .reserve__grid { display: grid; gap: clamp(2rem, 5vw, 3.5rem); align-items: start; }
+  .reserve__grid { display: grid; gap: clamp(2.5rem, 5vw, 4rem); align-items: start; }
   @media (min-width: 960px) { .reserve__grid { grid-template-columns: 0.85fr 1.15fr; } }
-  @media (min-width: 960px) { .reserve__intro { position: sticky; top: calc(var(--header-h, 68px) + 1.5rem); } }
-  .reserve__contact { display: grid; gap: 1rem; margin: 0; padding: 0; list-style: none; }
-  .reserve__contact li { display: flex; gap: 0.9rem; align-items: center; }
+  @media (min-width: 960px) { .reserve__intro { position: sticky; top: calc(var(--header-h, 72px) + 2rem); } }
+  .reserve__intro :global(.ui-h2) { color: #fff; }
+  .reserve__contact { display: grid; gap: 1.1rem; margin: 0; padding: 0; list-style: none; }
+  .reserve__contact li { display: flex; gap: 1rem; align-items: center; }
+  .reserve__contact :global(.ui-icon-badge) { background: var(--color-accent); color: var(--color-on-accent); }
   .reserve__contact div { display: grid; }
-  .reserve__k { font: 700 0.75rem/1.3 var(--font-display); letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-muted); }
-  .reserve__contact a, .reserve__contact div > span:last-child { font: 700 1.1rem/1.35 var(--font-display); color: var(--color-ink); text-decoration: none; }
+  .reserve__k { font: 500 0.78rem/1.3 var(--font-display); letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-on-dark-muted); }
+  .reserve__contact a, .reserve__contact div > span:last-child { font: 600 1.3rem/1.3 var(--font-display); letter-spacing: 0.02em; color: #fff; text-decoration: none; }
   .reserve__contact a:hover { color: var(--color-accent); }
 
-  .reserve__form { gap: 1.15rem; border-top: 5px solid var(--color-accent-bright); }
+  .reserve__form { gap: 1.2rem; border: 0; border-top: 6px solid var(--color-accent); box-shadow: 0 30px 60px -20px rgb(0 0 0 / 0.5); }
   .reserve__set { margin: 0; padding: 0; border: 0; min-width: 0; }
-  .reserve__set legend { margin-bottom: 0.45rem; padding: 0; font: 700 0.9rem/1.3 var(--font-display); }
+  .reserve__set legend { margin-bottom: 0.5rem; padding: 0; font: 600 0.88rem/1.3 var(--font-display); letter-spacing: 0.06em; text-transform: uppercase; }
   .reserve__choices { display: grid; gap: 0.6rem; }
   .reserve__choices--3 { grid-template-columns: repeat(3, 1fr); }
   .reserve__choice { position: relative; cursor: pointer; }
@@ -141,43 +143,46 @@ const defaultDays = '3';
   .reserve__choice span {
     display: grid;
     justify-items: center;
-    gap: 0.1rem;
-    padding: 0.75rem 0.4rem;
-    border: 1.5px solid #c6cdbd;
-    border-radius: 10px;
+    gap: 0.15rem;
+    padding: 0.8rem 0.4rem;
+    border: 1.5px solid #cdc7ba;
+    border-radius: 8px;
     background: #fff;
     text-align: center;
     transition: border-color 0.15s ease, background-color 0.15s ease;
   }
-  .reserve__choice strong { font: 800 1.1rem/1.2 var(--font-display); }
+  .reserve__choice:hover span { border-color: var(--color-ink); }
+  .reserve__choice strong { font: 700 1.25rem/1.1 var(--font-display); }
   .reserve__choice small { font-size: 0.78rem; color: var(--color-muted); }
-  .reserve__choice input:checked + span { border-color: var(--color-accent); background: var(--color-primary-soft); box-shadow: inset 0 0 0 1px var(--color-accent); }
-  .reserve__choice input:focus-visible + span { outline: 3px solid var(--color-accent-bright); outline-offset: 2px; }
+  .reserve__choice input:checked + span { border-color: var(--color-ink); background: var(--color-dark); color: #fff; }
+  .reserve__choice input:checked + span strong { color: var(--color-accent); }
+  .reserve__choice input:checked + span small { color: var(--color-on-dark-muted); }
+  .reserve__choice input:focus-visible + span { outline: 3px solid var(--color-accent); outline-offset: 2px; }
 
   .reserve__total {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
-    gap: 0.25rem 0.75rem;
+    gap: 0.25rem 0.85rem;
     margin: 0;
-    padding: 0.9rem 1.1rem;
-    border-radius: 12px;
-    background: var(--color-primary);
-    color: #fff;
+    padding: 1rem 1.2rem;
+    border-radius: 10px;
+    background: var(--color-accent);
+    color: var(--color-on-accent);
   }
-  .reserve__total span { font: 800 2rem/1 var(--font-display); letter-spacing: -0.02em; }
-  .reserve__total small { color: #cfe0cb; font-size: 0.95rem; }
+  .reserve__total span { font: 700 2.4rem/1 var(--font-display); }
+  .reserve__total small { font: 500 0.95rem/1.3 var(--font-display); letter-spacing: 0.06em; text-transform: uppercase; }
 
-  .reserve__row { display: grid; gap: 1.15rem; }
+  .reserve__row { display: grid; gap: 1.2rem; }
   @media (min-width: 560px) { .reserve__row { grid-template-columns: 1fr 1fr; } }
   .reserve__notes { min-height: 90px !important; }
   .reserve__check { display: flex; gap: 0.65rem; align-items: flex-start; cursor: pointer; }
-  .reserve__check input { flex: none; width: 1.2rem; height: 1.2rem; margin-top: 0.2rem; accent-color: var(--color-accent); }
+  .reserve__check input { flex: none; width: 1.2rem; height: 1.2rem; margin-top: 0.2rem; accent-color: var(--color-ink); }
   .reserve__check small { color: var(--color-muted); }
-  .reserve__check--terms { padding: 0.85rem 1rem; border-radius: 10px; background: var(--color-paper); border: 1px solid var(--color-line); }
-  .reserve__check a { color: var(--color-primary); font-weight: 700; }
+  .reserve__check--terms { padding: 0.9rem 1rem; border-radius: 8px; background: var(--color-accent-soft); border: 1px solid #c9e6b8; }
+  .reserve__check a { color: var(--color-accent-ink); font-weight: 700; }
   .reserve__fine { margin: 0; font-size: 0.88rem; text-align: center; color: var(--color-muted); }
-  .reserve__fine a { color: var(--color-primary); font-weight: 600; text-decoration: underline; }
+  .reserve__fine a { color: var(--color-ink); font-weight: 600; text-decoration: underline; }
 </style>
 
 <script>

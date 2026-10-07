@@ -39,7 +39,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     {ogImage && <meta property="og:image" content={ogImage} />}
 
     <!-- Preload only what the first screen needs: headline weight and body text. -->
-    <Font cssVariable="--font-archivo" preload={[{ weight: 800 }]} />
+    <Font cssVariable="--font-oswald" preload={[{ weight: 700 }]} />
     <Font cssVariable="--font-source-sans" preload={[{ weight: 400 }]} />
 
     {!noindex && jsonLd.map((data) => <script type="application/ld+json" set:html={JSON.stringify(data)} />)}

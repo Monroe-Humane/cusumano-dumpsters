@@ -1,0 +1,25 @@
+---
+// Dark title band for inner pages (terms, privacy, thanks, 404), ending in the safety stripe.
+interface Props {
+  eyebrow: string;
+  title: string;
+  /** Optional line under the title. */
+  lede?: string;
+}
+const { eyebrow, title, lede } = Astro.props;
+---
+<header class="page-header ui-section--dark ui-blueprint">
+  <div class="ui-container page-header__inner">
+    <p class="ui-eyebrow">{eyebrow}</p>
+    <h1 class="ui-h1">{title}</h1>
+    {lede && <p class="ui-lede">{lede}</p>}
+    <slot />
+  </div>
+</header>
+<div class="ui-hazard" aria-hidden="true"></div>
+
+<style>
+  .page-header { padding-block: clamp(3rem, 8vw, 5rem); }
+  .page-header__inner { display: grid; gap: 1rem; justify-items: start; }
+  .page-header .ui-h1 { color: #fff; font-size: clamp(2.3rem, 6vw, 4rem); }
+</style>

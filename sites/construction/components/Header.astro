@@ -1,24 +1,25 @@
 ---
 import SiteHeader from '../../../shared/components/SiteHeader.astro';
+import LogoMark from './LogoMark.astro';
 import site from '../data/site.json';
 
 const links = [
-  { href: '#services', label: 'Services' },
-  { href: '#work', label: 'Our Work' },
-  { href: '#about', label: 'About' },
-  { href: '#faq', label: 'FAQ' },
-  { href: '#contact', label: 'Contact' },
+  { href: '/#services', label: 'Services' },
+  { href: '/#work', label: 'Our Work' },
+  { href: '/#about', label: 'About' },
+  { href: '/#reviews', label: 'Reviews' },
+  { href: '/#faq', label: 'FAQ' },
   { href: site.links.dumpsterSite, label: 'Dumpsters' },
 ];
 ---
 <SiteHeader
   name="Cusumano"
-  sub={`Home Improvements · Since ${site.foundedYear}`}
+  sub="Home Improvements LLC"
   label={site.name}
   links={links}
   phone={site.contact.phone}
   phoneTel={site.contact.phoneTel}
-  menuCta={{ href: '#contact', label: 'Free estimate' }}
+  menuCta={{ href: '/#contact', label: 'Get a free estimate' }}
 >
-  <svg viewBox="0 0 64 64" width="40" height="40"><rect width="64" height="64" rx="12" fill="#1f3a5a"/><path d="M14 34 32 18l18 16" fill="none" stroke="#f97316" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 32v14h24V32" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round"/></svg>
+  <LogoMark />
 </SiteHeader>

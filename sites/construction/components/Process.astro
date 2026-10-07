@@ -1,0 +1,48 @@
+---
+import site from '../data/site.json';
+import SectionHead from '../../../shared/components/SectionHead.astro';
+---
+<section class="ui-section ui-section--tint" id="process" aria-labelledby="process-title">
+  <div class="ui-container">
+    <SectionHead id="process-title" eyebrow="How we work" title="Straightforward, start to finish" center />
+    <ol class="proc">
+      {site.process.map((step, i) => (
+        <li class="proc__step">
+          <span class="proc__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+          <h3 class="ui-h3">{step.title}</h3>
+          <p>{step.text}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .proc { position: relative; display: grid; gap: 2rem; margin: 0; padding: 0; list-style: none; }
+  @media (min-width: 640px) { .proc { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1000px) {
+    .proc { grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+    /* Dashed line joining the step numbers. */
+    .proc::before {
+      content: '';
+      position: absolute;
+      top: 2rem;
+      left: 12%;
+      right: 12%;
+      border-top: 2px dashed #c3bcae;
+    }
+  }
+  .proc__step { position: relative; display: grid; align-content: start; justify-items: center; gap: 0.75rem; text-align: center; }
+  .proc__num {
+    display: grid;
+    place-items: center;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background: var(--color-dark);
+    color: var(--color-accent);
+    font: 700 1.4rem/1 var(--font-display);
+    box-shadow: 0 0 0 8px var(--color-paper-200);
+  }
+  .proc__step p { margin: 0; max-width: 30ch; color: var(--color-muted); }
+</style>

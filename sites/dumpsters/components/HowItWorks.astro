@@ -4,11 +4,11 @@ import SectionHead from '../../../shared/components/SectionHead.astro';
 ---
 <section class="ui-section ui-section--dark ui-blueprint" id="how" aria-labelledby="how-title">
   <div class="ui-container">
-    <SectionHead id="how-title" eyebrow="How it works" title="Four easy steps" />
+    <SectionHead id="how-title" eyebrow="How it works" title="Booked in minutes. Gone when you're done." />
     <ol class="how__steps">
       {site.steps.map((step, i) => (
         <li class="how__step">
-          <span class="how__num" aria-hidden="true">{i + 1}</span>
+          <span class="how__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
           <h3 class="ui-h3">{step.title}</h3>
           <p>{step.text}</p>
         </li>
@@ -18,28 +18,37 @@ import SectionHead from '../../../shared/components/SectionHead.astro';
 </section>
 
 <style>
-  .how__steps { display: grid; gap: 1.25rem; margin: 0; padding: 0; list-style: none; counter-reset: none; }
+  .how__steps { position: relative; display: grid; gap: 1.25rem; margin: 0; padding: 0; list-style: none; }
   @media (min-width: 640px) { .how__steps { grid-template-columns: repeat(2, 1fr); } }
-  @media (min-width: 1040px) { .how__steps { grid-template-columns: repeat(4, 1fr); } }
-  .how__step {
-    display: grid;
-    gap: 0.6rem;
-    align-content: start;
-    padding: 1.5rem;
-    border-radius: var(--radius-card);
-    border: 1px solid rgb(255 255 255 / 0.12);
-    background: rgb(255 255 255 / 0.03);
+  @media (min-width: 1040px) {
+    .how__steps { grid-template-columns: repeat(4, 1fr); }
+    /* Line joining the step numbers. */
+    .how__steps::before { content: ''; position: absolute; top: 3.1rem; left: 2rem; right: 2rem; height: 2px; background: linear-gradient(90deg, var(--color-accent), rgb(255 255 255 / 0.08)); }
   }
+  .how__step {
+    position: relative;
+    display: grid;
+    align-content: start;
+    gap: 0.75rem;
+    padding: 1.75rem 1.5rem;
+    border-radius: var(--radius-card);
+    border: 1px solid rgb(255 255 255 / 0.1);
+    background: var(--color-dark-2);
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+  .how__step:hover { border-color: var(--color-accent); transform: translateY(-3px); }
   .how__step .ui-h3 { color: #fff; }
-  .how__step p { margin: 0; color: #b9c6bb; }
+  .how__step p { margin: 0; color: var(--color-on-dark-muted); }
   .how__num {
+    position: relative;
     display: grid;
     place-items: center;
-    width: 2.6rem;
-    height: 2.6rem;
-    border-radius: 10px;
-    background: var(--color-accent-bright);
-    color: var(--color-ink);
-    font: 800 1.25rem/1 var(--font-display);
+    width: 2.75rem;
+    height: 2.75rem;
+    margin-bottom: 0.5rem;
+    border-radius: 8px;
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+    font: 700 1.2rem/1 var(--font-display);
   }
 </style>

@@ -1,14 +1,20 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageHeader from '../../../shared/components/PageHeader.astro';
+import Icon from '../../../shared/components/Icon.astro';
 import site from '../data/site.json';
 ---
 <Layout title={`Page not found | ${site.name}`} description="That page doesn't exist." noindex>
-  <main id="main" class="ui-section">
-    <div class="ui-container grid max-w-2xl justify-items-center gap-5 text-center">
-      <p class="ui-eyebrow">404</p>
-      <h1 class="ui-h1">That page isn't here.</h1>
-      <p class="ui-lede">Sizes, prices and booking are all on our home page.</p>
-      <a class="ui-btn ui-btn--primary" href="/">Go to the home page</a>
-    </div>
+  <Header />
+  <main id="main">
+    <PageHeader eyebrow="404" title="That page isn't here.">
+      <p class="ui-lede">Sizes, prices and booking are all on our home page, or call <a class="font-bold text-white underline" href={site.contact.phoneTel}>{site.contact.phone}</a>.</p>
+      <div class="ui-actions mt-2">
+        <a class="ui-btn ui-btn--accent" href="/">Go to the home page <Icon name="arrow" /></a>
+      </div>
+    </PageHeader>
   </main>
+  <Footer />
 </Layout>

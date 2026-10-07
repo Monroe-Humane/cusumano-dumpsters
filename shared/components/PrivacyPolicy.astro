@@ -16,9 +16,7 @@ interface Props {
 }
 const { businessName, legalName, email, phone, phoneTel, address, formCollects, embeds = [], updated } = Astro.props;
 ---
-<article class="ui-container privacy">
-  <p class="ui-eyebrow">Privacy</p>
-  <h1 class="ui-h2">Privacy Policy</h1>
+<article class="ui-container ui-section privacy">
   <p class="privacy__updated">Last updated {updated}</p>
 
   <p>
@@ -68,5 +66,5 @@ const { businessName, legalName, email, phone, phoneTel, address, formCollects, 
   .privacy ul { margin: 0; padding-left: 1.25rem; display: grid; gap: 0.45rem; list-style: disc; }
   .privacy__updated { color: var(--color-muted); }
   .privacy__contact { font-style: normal; }
-  .privacy a { color: var(--color-primary); font-weight: 600; }
+  .privacy a { color: var(--color-accent-ink); font-weight: 600; }
 </style>

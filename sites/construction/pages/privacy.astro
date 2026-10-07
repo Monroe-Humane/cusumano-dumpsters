@@ -3,12 +3,14 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import PrivacyPolicy from '../../../shared/components/PrivacyPolicy.astro';
+import PageHeader from '../../../shared/components/PageHeader.astro';
 import site from '../data/site.json';
 const { contact } = site;
 ---
 <Layout title={`Privacy Policy | ${site.name}`} description={`How ${site.name} handles information sent through this website.`}>
   <Header />
-  <main id="main" class="ui-section">
+  <main id="main">
+    <PageHeader eyebrow="Privacy" title="Privacy Policy" />
     <PrivacyPolicy
       businessName={site.name}
       legalName="Cusumano Home Improvements LLC"

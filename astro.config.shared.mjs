@@ -18,8 +18,8 @@ export function siteConfig({ name, site, port }) {
     // Fonts are downloaded at build time and served from the site itself: no render-blocking
     // request to Google, and metric-matched fallbacks keep text from jumping when they load.
     fonts: [
-      { provider: fontProviders.google(), name: 'Archivo', cssVariable: '--font-archivo', weights: [600, 700, 800], subsets: ['latin'], fallbacks: ['sans-serif'] },
-      { provider: fontProviders.google(), name: 'Source Sans 3', cssVariable: '--font-source-sans', weights: [400, 600], subsets: ['latin'], fallbacks: ['sans-serif'] },
+      { provider: fontProviders.google(), name: 'Oswald', cssVariable: '--font-oswald', weights: [500, 600, 700], subsets: ['latin'], fallbacks: ['sans-serif'] },
+      { provider: fontProviders.google(), name: 'Source Sans 3', cssVariable: '--font-source-sans', weights: [400, 600, 700], subsets: ['latin'], fallbacks: ['sans-serif'] },
     ],
     // Small pages: inline the CSS so first paint needs no extra request.
     build: { inlineStylesheets: 'always' },
