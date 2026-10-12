@@ -1,12 +1,12 @@
 # Cusumano websites
 
-Two one-page sites from one folder, both static Astro + Tailwind v4 for Cloudflare Pages.
+Two one-page sites from one folder, both static Astro + Tailwind v4, hosted on GitHub Pages.
 No database, no server, no API keys.
 
 | Site | Folder | Live address | Look |
 |---|---|---|---|
 | **Cusumano Home Improvements** (construction) | `sites/construction/` | https://cusumanohi.com | charcoal + logo gold |
-| **Cusumano Dumpster Rentals** | `sites/dumpsters/` | placeholder: https://cusumano-dumpsters.pages.dev | charcoal + logo lime |
+| **Cusumano Dumpster Rentals** | `sites/dumpsters/` | https://cusdump.com | charcoal + logo lime |
 
 Each site links to the other (header, services band, footer).
 
@@ -68,16 +68,24 @@ npm.cmd run check              # type checks for both
 npm.cmd run build              # dist/construction and dist/dumpsters
 ```
 
-## Deploying (Cloudflare Pages)
+## Deploying (GitHub Pages)
 
-Create **two** Pages projects from this repo:
+Pushing to `main` runs `.github/workflows/deploy.yml`, which builds both sites:
 
-| Project | Build command | Output directory |
+| Site | Published to | Address |
 |---|---|---|
-| construction | `npm run build:construction` | `dist/construction` |
-| dumpsters | `npm run build:dumpsters` | `dist/dumpsters` |
+| construction | GitHub Pages of `Monroe-Humane/cusumano-websites` (this repo) | https://cusumanohi.com |
+| dumpsters | `gh-pages` branch of `Monroe-Humane/cusumano-dumpsters` | https://cusdump.com |
 
-When the dumpster site's real address is chosen, update it in four places:
-`astro.config.dumpsters.mjs` (`site`), `url` in `sites/dumpsters/data/site.json`,
-`sites/dumpsters/public/robots.txt` and `links.dumpsterSite` in `sites/construction/data/site.json`.
-Then point `cusumanohi.com` at the construction project (its DNS currently goes to WordPress.com).
+The dumpster push uses a deploy key: the private half is this repo's `DUMPSTERS_DEPLOY_KEY`
+secret, the public half is a write deploy key on `cusumano-dumpsters`.
+
+DNS for both domains is at GoDaddy. Each has the four GitHub Pages A records on `@`
+(185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153) and `www` as a CNAME
+to `monroe-humane.github.io`. Each site's `public/CNAME` holds its domain.
+
+GitHub Pages ignores the `_headers` files (they were written for Cloudflare Pages).
+
+To change the dumpster site's address, update `astro.config.dumpsters.mjs` (`site`), `url` in
+`sites/dumpsters/data/site.json`, `sites/dumpsters/public/robots.txt`, `sites/dumpsters/public/CNAME`,
+`cname` in the workflow and `links.dumpsterSite` in `sites/construction/data/site.json`.
