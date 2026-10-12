@@ -1,8 +1,8 @@
-# Builds both sites on every push to main.
-# Construction -> this repo's GitHub Pages (cusumanohi.com).
-# Dumpsters    -> gh-pages branch of Monroe-Humane/cusumano-dumpsters (cusdump.com),
-#                 pushed with the deploy key stored in the DUMPSTERS_DEPLOY_KEY secret.
-name: Deploy sites
+# The same source is pushed to two repos; each one builds and publishes its own site
+# to its own GitHub Pages:
+#   Monroe-Humane/cusumano-websites  -> construction (cusumanohi.com)
+#   Monroe-Humane/cusumano-dumpsters -> dumpsters    (cusdump.com)
+name: Deploy site
 
 on:
   push:
@@ -18,6 +18,9 @@ concurrency:
   group: pages
   cancel-in-progress: false
 
+env:
+  SITE: ${{ github.repository == 'Monroe-Humane/cusumano-dumpsters' && 'dumpsters' || 'construction' }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -28,17 +31,12 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - run: npm run build
+      - run: npm run build:${{ env.SITE }}
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/construction
-      - uses: actions/upload-artifact@v4
-        with:
-          name: dumpsters
-          path: dist/dumpsters
-          include-hidden-files: true
+          path: dist/${{ env.SITE }}
 
-  deploy-construction:
+  deploy:
     needs: build
     runs-on: ubuntu-latest
     environment:
@@ -47,20 +45,3 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
-
-  deploy-dumpsters:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/download-artifact@v4
-        with:
-          name: dumpsters
-          path: dumpsters
-      - uses: peaceiris/actions-gh-pages@v4
-        with:
-          deploy_key: ${{ secrets.DUMPSTERS_DEPLOY_KEY }}
-          external_repository: Monroe-Humane/cusumano-dumpsters
-          publish_branch: gh-pages
-          publish_dir: dumpsters
-          cname: cusdump.com
-          force_orphan: true

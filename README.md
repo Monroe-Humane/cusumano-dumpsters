@@ -70,15 +70,16 @@ npm.cmd run build              # dist/construction and dist/dumpsters
 
 ## Deploying (GitHub Pages)
 
-Pushing to `main` runs `.github/workflows/deploy.yml`, which builds both sites:
+This folder is pushed to **two** public repos. Each runs `.github/workflows/deploy.yml` on a
+push to `main`, builds only its own site and publishes it to its own GitHub Pages:
 
-| Site | Published to | Address |
+| Repo | Site | Address |
 |---|---|---|
-| construction | GitHub Pages of `Monroe-Humane/cusumano-websites` (this repo) | https://cusumanohi.com |
-| dumpsters | `gh-pages` branch of `Monroe-Humane/cusumano-dumpsters` | https://cusdump.com |
+| `Monroe-Humane/cusumano-websites` | construction | https://cusumanohi.com |
+| `Monroe-Humane/cusumano-dumpsters` | dumpsters | https://cusdump.com |
 
-The dumpster push uses a deploy key: the private half is this repo's `DUMPSTERS_DEPLOY_KEY`
-secret, the public half is a write deploy key on `cusumano-dumpsters`.
+`origin` has both repos as push URLs, so a plain `git push` updates both. An edit made on
+github.com reaches only that one repo: pull it here and push again to sync the other.
 
 DNS for both domains is at GoDaddy. Each has the four GitHub Pages A records on `@`
 (185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153) and `www` as a CNAME
@@ -87,5 +88,5 @@ to `monroe-humane.github.io`. Each site's `public/CNAME` holds its domain.
 GitHub Pages ignores the `_headers` files (they were written for Cloudflare Pages).
 
 To change the dumpster site's address, update `astro.config.dumpsters.mjs` (`site`), `url` in
-`sites/dumpsters/data/site.json`, `sites/dumpsters/public/robots.txt`, `sites/dumpsters/public/CNAME`,
-`cname` in the workflow and `links.dumpsterSite` in `sites/construction/data/site.json`.
+`sites/dumpsters/data/site.json`, `sites/dumpsters/public/robots.txt`, `sites/dumpsters/public/CNAME`
+and `links.dumpsterSite` in `sites/construction/data/site.json`.
