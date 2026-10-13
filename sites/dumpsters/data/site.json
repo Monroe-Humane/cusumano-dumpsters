@@ -106,8 +106,8 @@
       "text": "We drop it where it's safe and accessible. Payment is due at delivery."
     },
     {
-      "title": "Load it",
-      "text": "Fill it evenly, no higher than the top edge. Keep prohibited items out."
+      "title": "You load it",
+      "text": "Loading is up to you: we deliver and haul away, but we don't load. Fill it evenly, no higher than the top edge, and keep prohibited items out."
     },
     {
       "title": "We pick it up",
@@ -137,6 +137,10 @@
     "Once placed, please don't move it"
   ],
   "faq": [
+    {
+      "q": "Do you load the dumpster for me?",
+      "a": "No. You load your own dumpster. We drop it off, you fill it on your schedule, and we pick it up and haul it away. The back doors open to make loading easier."
+    },
     {
       "q": "How much weight is included?",
       "a": "Every rental includes 2 tons. Anything over that is $75 per additional ton."
