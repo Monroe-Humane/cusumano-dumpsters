@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /thanks/
 
-Sitemap: https://cusdump.com/sitemap-index.xml
+Sitemap: https://cusdumpsters.com/sitemap-index.xml

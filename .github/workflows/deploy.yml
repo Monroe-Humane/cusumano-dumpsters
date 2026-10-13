@@ -1,7 +1,7 @@
 # The same source is pushed to two repos; each one builds and publishes its own site
 # to its own GitHub Pages:
 #   Monroe-Humane/cusumano-websites  -> construction (cusumanohi.com)
-#   Monroe-Humane/cusumano-dumpsters -> dumpsters    (cusdump.com)
+#   Monroe-Humane/cusumano-dumpsters -> dumpsters    (cusdumpsters.com)
 name: Deploy site
 
 on:

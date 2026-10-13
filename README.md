@@ -6,7 +6,7 @@ No database, no server, no API keys.
 | Site | Folder | Live address | Look |
 |---|---|---|---|
 | **Cusumano Home Improvements** (construction) | `sites/construction/` | https://cusumanohi.com | charcoal + logo gold |
-| **Cusumano Dumpster Rentals** | `sites/dumpsters/` | https://cusdump.com | charcoal + logo lime |
+| **Cusumano Dumpster Rentals** | `sites/dumpsters/` | https://cusdumpsters.com | charcoal + logo lime |
 
 Each site links to the other (header, services band, footer).
 
@@ -76,7 +76,7 @@ push to `main`, builds only its own site and publishes it to its own GitHub Page
 | Repo | Site | Address |
 |---|---|---|
 | `Monroe-Humane/cusumano-websites` | construction | https://cusumanohi.com |
-| `Monroe-Humane/cusumano-dumpsters` | dumpsters | https://cusdump.com |
+| `Monroe-Humane/cusumano-dumpsters` | dumpsters | https://cusdumpsters.com |
 
 `origin` has both repos as push URLs, so a plain `git push` updates both. An edit made on
 github.com reaches only that one repo: pull it here and push again to sync the other.
